@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistics</title>
+    <link rel="stylesheet" href="assets\CSS\admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="admin-layout">
+    <aside class="admin-sidebar animate__animated animate__fadeInLeft">
+        <div class="admin-sidebar-header">
+            <div class="admin-sidebar-title">
+                <i class="fas fa-shield-alt"></i>
+                <span>FriendSphere Admin</span>
+            </div>
+        </div>
+        <ul class="admin-menu">
+            <li><a href="#dashboard" class="is-active"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="#users"><i class="fas fa-users"></i> Utilisateurs</a></li>
+            <li><a href="#posts"><i class="fas fa-newspaper"></i> Publications</a></li>
+            <li><a href="#moderators"><i class="fas fa-user-tie"></i> Modérateurs</a></li>
+            <li><a href="#statistics"><i class="fas fa-chart-bar"></i> Statistiques</a></li>
+        </ul>
+    </aside>
+    
+    <main class="admin-main">
+        <header class="admin-header">
+            <h1 class="admin-title">
+                <i class="fas fa-chart-bar mr-2"></i> Statistiques détaillées
+            </h1>
+            <div class="field">
+                <div class="control">
+                    <div class="select">
+                        <select>
+                            <option>7 derniers jours</option>
+                            <option>30 derniers jours</option>
+                            <option>Année en cours</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="admin-stats-grid">
+            <div class="admin-card">
+                <div class="admin-card-header">
+                    <h2><i class="fas fa-users mr-2"></i> Nouveaux utilisateurs</h2>
+                </div>
+                <div class="admin-card-body">
+                    <canvas id="usersChart"></canvas>
+                </div>
+            </div>
+            
+            <!-- Autres graphiques -->
+        </div>
+    </main>
+
+    <script>
+        // Exemple avec Chart.js
+        const ctx = document.getElementById('usersChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                datasets: [{
+                    label: 'Nouveaux utilisateurs',
+                    data: [120, 190, 170, 220, 300, 280],
+                    backgroundColor: 'rgba(74, 0, 224, 0.1)',
+                    borderColor: '#4a00e0',
+                    tension: 0.3
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

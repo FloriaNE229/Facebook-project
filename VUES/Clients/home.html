@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="../../assets/css/bulma.min.css">
+    <link rel="stylesheet" href="../../assets/css/animate.min.css">
+    <link rel="stylesheet" href="../../assets/css/custom.css">
+    <link rel="stylesheet" href="../../assets/css/responsive.css">
+</head>
+<body>
+    <div class="home-page animate__animated animate__fadeIn" data-page="home">
+    <!-- Barre de navigation avec animation -->
+    <nav class="navbar is-primary animate__animated animate__fadeInDown" role="navigation" aria-label="Menu principal">
+        <!-- ... contenu navbar inchangé ... -->
+    </nav>
+
+    <!-- Contenu principal avec animations progressives -->
+    <div class="container mt-4">
+        <div class="columns">
+            <!-- Colonne gauche - Animation d'entrée -->
+            <div class="column is-3 animate__animated animate__fadeInLeft animate__delay-1s">
+                <div class="box profile-card animate__animated animate__pulse animate__delay-2s">
+                    <!-- ... contenu profil ... -->
+                </div>
+            </div>
+
+            <!-- Colonne centrale - Animation principale -->
+            <div class="column is-6">
+                <!-- Création de post avec animation -->
+                <div class="box post-creator animate__animated animate__fadeInUp animate__delay-1s">
+                    <!-- ... formulaire de post ... -->
+                </div>
+                
+                <!-- Liste des posts avec animation -->
+                <div id="posts-container" class="animate__animated animate__fadeIn animate__delay-1s">
+                    <!-- Les posts individuels auront leurs propres animations -->
+                </div>
+            </div>
+
+            <!-- Colonne droite - Animation d'entrée -->
+            <div class="column is-3 animate__animated animate__fadeInRight animate__delay-1s">
+                <div class="box animate__animated animate__fadeInUp animate__delay-2s">
+                    <h3 class="title is-5">Suggestions d'amis</h3>
+                    <!-- ... contenu suggestions ... -->
+                </div>
+                
+                <div class="box mt-4 animate__animated animate__fadeInUp animate__delay-3s">
+                    <h3 class="title is-5">Événements</h3>
+                    <!-- ... contenu événements ... -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Template pour un post avec classes d'animation -->
+<template id="post-template">
+    <div class="box post animate__animated animate__fadeInUp">
+        <!-- ... structure du post ... -->
+    </div>
+</template>
+
+                <script src="../../assets/js/utils.js"></script>
+                <script src="../../assets/js/router.js"></script>
+                <script src="../../assets/js/app.js"></script>
+
+
+</body>
+</html>

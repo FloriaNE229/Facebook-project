@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="../../assets/css/bulma.min.css">
+    <link rel="stylesheet" href="../../assets/css/animate.min.css">
+    <link rel="stylesheet" href="../../assets/css/custom.css">
+    <link rel="stylesheet" href="../../assets/css/responsive.css">
+
+</head>
+<body>
+    <div class="edit-profile-layout" id="edit-profile-page">
+    <div class="container">
+        <div class="columns is-centered">
+            <div class="column is-8">
+                <div class="box animate__animated animate__fadeIn">
+                    <h1 class="title is-3 has-text-centered">
+                        <i class="fas fa-user-edit mr-2"></i>Modifier le profil
+                    </h1>
+
+                    <form id="edit-profile-form">
+                        <div class="field">
+                            <label class="label">Photo de profil</label>
+                            <div class="file has-name is-boxed">
+                                <label class="file-label">
+                                    <input class="file-input" type="file" accept="image/*">
+                                    <span class="file-cta">
+                                        <span class="file-icon"><i class="fas fa-upload"></i></span>
+                                        <span class="file-label">Choisir une image...</span>
+                                    </span>
+                                    <span class="file-name">Aucun fichier sélectionné</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Nom complet</label>
+                            <div class="control">
+                                <input class="input" type="text" value="Jean Dupont">
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Localisation</label>
+                            <div class="control">
+                                <input class="input" type="text" value="Paris, France">
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Bio</label>
+                            <div class="control">
+                                <textarea class="textarea" rows="3">Développeur passionné</textarea>
+                            </div>
+                        </div>
+
+                        <div class="field is-grouped is-grouped-centered">
+                            <div class="control">
+                                <button type="submit" class="button is-primary">
+                                    <i class="fas fa-save mr-2"></i>Enregistrer
+                                </button>
+                            </div>
+                            <div class="control">
+                                <a href="#profile" class="button is-light">Annuler</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+                <script src="../../assets/js/utils.js"></script>
+                <script src="../../assets/js/router.js"></script>
+                <script src="../../assets/js/app.js"></script>
+
+
+</body>
+</html>

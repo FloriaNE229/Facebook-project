@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+   
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modérators</title>
+    <link rel="stylesheet" href="assets\CSS\admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+                       
+</head>
+<body class="admin-layout">
+    <aside class="admin-sidebar animate__animated animate__fadeInLeft">
+        <div class="admin-sidebar-header">
+            <div class="admin-sidebar-title">
+                <i class="fas fa-shield-alt"></i>
+                <span>FriendSphere Admin</span>
+            </div>
+        </div>
+        <ul class="admin-menu">
+            <li><a href="#dashboard" class="is-active"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="#users"><i class="fas fa-users"></i> Utilisateurs</a></li>
+            <li><a href="#posts"><i class="fas fa-newspaper"></i> Publications</a></li>
+            <li><a href="#moderators"><i class="fas fa-user-tie"></i> Modérateurs</a></li>
+            <li><a href="#statistics"><i class="fas fa-chart-bar"></i> Statistiques</a></li>
+        </ul>
+    </aside>
+    
+    <main class="admin-main">
+        <header class="admin-header">
+            <h1 class="admin-title">
+                <i class="fas fa-user-tie mr-2"></i> Gestion des modérateurs
+            </h1>
+            <button class="button is-primary">
+                <i class="fas fa-plus mr-2"></i> Ajouter un modérateur
+            </button>
+        </header>
+
+        <div class="admin-card">
+            <div class="admin-card-body">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Email</th>
+                            <th>Dernière activité</th>
+                            <th>Permissions</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Admin Principal</td>
+                            <td>admin@friendsphere.com</td>
+                            <td>Il y a 2 heures</td>
+                            <td><span class="tag is-dark">Toutes</span></td>
+                            <td>
+                                <div class="buttons">
+                                    <button class="button is-small is-warning">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

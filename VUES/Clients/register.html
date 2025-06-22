@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="../../assets/css/bulma.min.css">
+    <link rel="stylesheet" href="../../assets/css/animate.min.css">
+    <link rel="stylesheet" href="../../assets/css/custom.css">
+    <link rel="stylesheet" href="../../assets/css/responsive.css">
+
+</head>
+<body>
+    <div class="profile-layout" id="profile-page">
+    <div class="profile-header">
+        <div class="profile-cover" style="background-image: url('../../assets/images/ui/cover-default.jpg')"></div>
+        <div class="profile-avatar-container animate__animated animate__fadeInUp">
+            <img src="../../assets/images/avatars/default.jpg" class="profile-avatar is-clickable" id="profile-avatar">
+            <button class="button is-small is-primary edit-avatar-btn">
+                <i class="fas fa-camera"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="profile-content">
+        <div class="container">
+            <div class="columns">
+                <!-- Colonne gauche -->
+                <div class="column is-3">
+                    <div class="box profile-info-box animate__animated animate__fadeInLeft">
+                        <h3 class="title is-4"><i class="fas fa-info-circle mr-2"></i>Informations</h3>
+                        <div class="content">
+                            <p><i class="fas fa-user mr-2"></i> <span id="profile-name">Jean Dupont</span></p>
+                            <p><i class="fas fa-map-marker-alt mr-2"></i> <span id="profile-location">Paris, France</span></p>
+                            <p><i class="fas fa-calendar-alt mr-2"></i> Membre depuis <span id="join-date">2023</span></p>
+                        </div>
+                        <a href="#edit-profile" class="button is-small is-fullwidth is-outlined mt-3">
+                            <i class="fas fa-edit mr-2"></i>Modifier
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Colonne principale -->
+                <div class="column is-6">
+                    <div class="box profile-posts-box animate__animated animate__fadeIn">
+                        <h3 class="title is-4"><i class="fas fa-newspaper mr-2"></i>Publications</h3>
+                        <div id="posts-container">
+                            <!-- Posts chargés dynamiquement -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Colonne droite -->
+                <div class="column is-3">
+                    <div class="box profile-friends-box animate__animated animate__fadeInRight">
+                        <h3 class="title is-4"><i class="fas fa-users mr-2"></i>Amis</h3>
+                        <div class="friends-grid">
+                            <!-- Miniatures amis -->
+                        </div>
+                        <a href="#friends" class="button is-small is-fullwidth is-outlined mt-3">
+                            Voir tous
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+                <script src="../../assets/js/utils.js"></script>
+                <script src="../../assets/js/router.js"></script>
+                <script src="../../assets/js/app.js"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="../../assets/css/bulma.min.css">
+    <link rel="stylesheet" href="../../assets/css/animate.min.css">
+    <link rel="stylesheet" href="../../assets/css/custom.css">
+    <link rel="stylesheet" href="../../assets/css/responsive.css">
+
+</head>
+<body>
+    <div class="settings-layout" id="settings-page">
+    <div class="container">
+        <div class="columns">
+            <div class="column is-3">
+                <aside class="menu settings-menu animate__animated animate__fadeInLeft">
+                    <p class="menu-label">Paramètres</p>
+                    <ul class="menu-list">
+                        <li><a href="#settings-account" class="is-active">Compte</a></li>
+                        <li><a href="#settings-privacy">Confidentialité</a></li>
+                        <li><a href="#settings-notifications">Notifications</a></li>
+                        <li><a href="#settings-security">Sécurité</a></li>
+                    </ul>
+                </aside>
+            </div>
+
+            <div class="column is-9">
+                <div class="box settings-content animate__animated animate__fadeIn">
+                    <!-- Section Compte -->
+                    <div id="settings-account" class="settings-section">
+                        <h3 class="title is-4"><i class="fas fa-user-cog mr-2"></i>Paramètres du compte</h3>
+                        
+                        <form id="account-settings-form">
+                            <div class="field">
+                                <label class="label">Langue</label>
+                                <div class="control">
+                                    <div class="select is-fullwidth">
+                                        <select>
+                                            <option>Français</option>
+                                            <option>English</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="field">
+                                <label class="label">Thème</label>
+                                <div class="control">
+                                    <label class="radio">
+                                        <input type="radio" name="theme" checked>
+                                        Clair
+                                    </label>
+                                    <label class="radio">
+                                        <input type="radio" name="theme">
+                                        Sombre
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="field">
+                                <div class="control">
+                                    <button type="submit" class="button is-primary">
+                                        <i class="fas fa-save mr-2"></i>Enregistrer
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+                        
+                <script src="../../assets/js/utils.js"></script>
+                <script src="../../assets/js/router.js"></script>
+                <script src="../../assets/js/app.js"></script>
+
+ 
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Connexion</title>
+    <link rel="stylesheet" href="../../assets/css/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .admin-login-container {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .admin-login-card {
+            width: 100%;
+            max-width: 400px;
+            animation: fadeInUp 0.6s;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-login-container">
+        <div class="admin-login-card box animate__animated animate__fadeInUp">
+            <div class="has-text-centered mb-5">
+                <i class="fas fa-shield-alt fa-4x has-text-primary"></i>
+                <h1 class="title is-3 mt-3">Espace Administrateur</h1>
+            </div>
+            
+            <form id="adminLoginForm">
+                <div class="field">
+                    <div class="control has-icons-left">
+                        <input class="input" type="text" placeholder="Identifiant" required>
+                        <span class="icon is-left"><i class="fas fa-user-shield"></i></span>
+                    </div>
+                </div>
+                
+                <div class="field">
+                    <div class="control has-icons-left">
+                        <input class="input" type="password" placeholder="Mot de passe" required>
+                        <span class="icon is-left"><i class="fas fa-lock"></i></span>
+                    </div>
+                </div>
+                
+                <div class="field">
+                    <button type="submit" class="button is-primary is-fullwidth">
+                        <i class="fas fa-sign-in-alt mr-2"></i> Se connecter
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

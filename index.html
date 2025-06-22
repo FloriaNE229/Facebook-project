@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FriendSphere</title>
+    <meta name="description" content="Rejoignez FriendSphere, votre réseau social préféré pour rester connecté avec vos amis">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/CSS/bulma.min.css">
+    <link rel="stylesheet" href="assets/CSS/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/CSS/custom.css">
+    
+    <!-- Polices -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Poppins:wght@600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <section class="hero is-fullheight is-light">
+        <div class="hero-body">
+            <div class="container">
+                <!-- En-tête avec animation -->
+                <header class="has-text-centered mb-6 animate__animated animate__fadeInDown">
+                    <h1 class="title is-1 has-text-primary" aria-label="FriendSphere">
+                        <span class="icon-text">
+                            <span class="icon">
+                                <i class="fas fa-users" aria-hidden="true"></i>
+                            </span>
+                            <span>FriendSphere</span>
+                        </span>
+                    </h1>
+                    <p class="subtitle is-4 has-text-grey-dark animate__animated animate__fadeIn animate__delay-1s">
+                        Connectez-vous avec vos amis et le monde qui vous entoure
+                    </p>
+                </header>
+
+                <main class="columns is-centered is-multiline">
+                    <!-- Carte Connexion avec animation -->
+                    <div class="column is-12-mobile is-5-desktop animate__animated animate__fadeInLeft">
+                        <article class="box" role="region" aria-labelledby="login-title">
+                            <div class="card-header has-text-centered">
+                                <span class="icon is-large has-text-primary" aria-hidden="true">
+                                    <i class="fas fa-sign-in-alt fa-2x"></i>
+                                </span>
+                                <h2 id="login-title" class="title is-3 mt-3">Connexion</h2>
+                            </div>
+                            <div class="card-content">
+                                <form id="login-form" novalidate>
+                                    <div class="field">
+                                        <label for="login-email" class="is-sr-only">Email</label>
+                                        <div class="control has-icons-left">
+                                            <input id="login-email" class="input is-medium" type="email" placeholder="Email" required>
+                                            <span class="icon is-left">
+                                                <i class="fas fa-envelope" aria-hidden="true"></i>
+                                            </span>
+                                        </div>
+                                        <p class="help is-danger" id="login-email-error"></p>
+                                    </div>
+                                    <div class="field">
+                                        <label for="login-password" class="is-sr-only">Mot de passe</label>
+                                        <div class="control has-icons-left has-icons-right">
+                                            <input id="login-password" class="input is-medium" type="password" placeholder="Mot de passe" required minlength="6">
+                                            <span class="icon is-left">
+                                                <i class="fas fa-lock" aria-hidden="true"></i>
+                                            </span>
+                                            <span class="icon is-right toggle-password" style="pointer-events: auto; cursor: pointer;">
+                                                <i class="fas fa-eye" aria-hidden="true"></i>
+                                            </span>
+                                        </div>
+                                        <p class="help is-danger" id="login-password-error"></p>
+                                    </div>
+                                    <div class="field">
+                                        <button type="submit" class="button is-primary is-medium is-fullwidth mt-5 animate__animated animate__pulse animate__delay-2s" id="login-button" aria-label="Se connecter">
+                                            <span class="icon">
+                                                <i class="fas fa-sign-in-alt"></i>
+                                            </span>
+                                            <span>Se connecter</span>
+                                        </button>
+                                    </div>
+                                    <div class="has-text-centered mt-4">
+                                        <a href="#" class="has-text-grey is-size-7">Mot de passe oublié ?</a>
+                                    </div>
+                                </form>
+                            </div>
+                        </article>
+                    </div>
+
+                    <!-- Séparateur animé -->
+                    <div class="column is-12-mobile is-1-desktop has-text-centered is-flex is-justify-content-center my-4 my-0-desktop animate__animated animate__fadeIn animate__delay-1s" aria-hidden="true">
+                        <div class="divider is-hidden-desktop">OU</div>
+                        <div class="divider-vertical is-hidden-touch">
+                            <span class="tag is-light is-medium">OU</span>
+                        </div>
+                    </div>
+
+                    <!-- Carte Inscription avec animation -->
+                    <div class="column is-12-mobile is-5-desktop animate__animated animate__fadeInRight">
+                        <article class="box" role="region" aria-labelledby="register-title">
+                            <div class="card-header has-text-centered">
+                                <span class="icon is-large has-text-info" aria-hidden="true">
+                                    <i class="fas fa-user-plus fa-2x"></i>
+                                </span>
+                                <h2 id="register-title" class="title is-3 mt-3">Inscription</h2>
+                            </div>
+                            <div class="card-content">
+                                <form id="register-form" novalidate>
+                                    <div class="field">
+                                        <label for="register-name" class="is-sr-only">Nom complet</label>
+                                        <div class="control has-icons-left">
+                                            <input id="register-name" class="input is-medium" type="text" placeholder="Nom complet" required>
+                                            <span class="icon is-left">
+                                                <i class="fas fa-user" aria-hidden="true"></i>
+                                            </span>
+                                        </div>
+                                        <p class="help is-danger" id="register-name-error"></p>
+                                    </div>
+                                    <div class="field">
+                                        <label for="register-email" class="is-sr-only">Email</label>
+                                        <div class="control has-icons-left">
+                                            <input id="register-email" class="input is-medium" type="email" placeholder="Email" required>
+                                            <span class="icon is-left">
+                                                <i class="fas fa-envelope" aria-hidden="true"></i>
+                                            </span>
+                                        </div>
+                                        <p class="help is-danger" id="register-email-error"></p>
+                                    </div>
+                                    <div class="field">
+                                        <label for="register-password" class="is-sr-only">Mot de passe</label>
+                                        <div class="control has-icons-left has-icons-right">
+                                            <input id="register-password" class="input is-medium" type="password" placeholder="Mot de passe" required minlength="8">
+                                            <span class="icon is-left">
+                                                <i class="fas fa-lock" aria-hidden="true"></i>
+                                            </span>
+                                            <span class="icon is-right toggle-password" style="pointer-events: auto; cursor: pointer;">
+                                                <i class="fas fa-eye" aria-hidden="true"></i>
+                                            </span>
+                                        </div>
+                                        <progress id="password-strength" class="progress is-small is-hidden" value="0" max="100"></progress>
+                                        <p class="help is-danger" id="register-password-error"></p>
+                                    </div>
+                                    <div class="field">
+                                        <button type="submit" class="button is-info is-medium is-fullwidth mt-5 animate__animated animate__pulse animate__delay-2s" id="register-button" aria-label="S'inscrire">
+                                            <span class="icon">
+                                                <i class="fas fa-user-plus"></i>
+                                            </span>
+                                            <span>S'inscrire</span>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </article>
+                    </div>
+                </main>
+
+                <!-- Pied de page -->
+                <footer class="has-text-centered mt-6 animate__animated animate__fadeInUp animate__delay-1s">
+                    <div class="social-links mb-3">
+                        <a href="#" class="button is-light is-small" aria-label="Facebook">
+                            <span class="icon">
+                                <i class="fab fa-facebook"></i>
+                            </span>
+                        </a>
+                        <a href="#" class="button is-light is-small" aria-label="Twitter">
+                            <span class="icon">
+                                <i class="fab fa-twitter"></i>
+                            </span>
+                        </a>
+                        <a href="#" class="button is-light is-small" aria-label="Instagram">
+                            <span class="icon">
+                                <i class="fab fa-instagram"></i>
+                            </span>
+                        </a>
+                    </div>
+                    <p class="has-text-grey">
+                        © 2025 FriendSphere - <a href="#" class="has-text-grey">Conditions</a> - <a href="#" class="has-text-grey">Confidentialité</a>
+                    </p>
+                </footer>
+            </div>
+        </div>
+    </section>
+
+    <!-- Toast Notification avec animation -->
+    <div id="toast" class="notification is-success is-hidden animate__animated animate__bounceInRight" style="position: fixed; bottom: 20px; right: 20px; max-width: 350px; z-index: 100;">
+        <button class="delete" id="close-toast"></button>
+        <p id="toast-message">Bienvenue sur FriendSphere !</p>
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/auth.js"></script>
+    
+    <!-- Script pour gérer les animations -->
+    <script>
+        // Animation au chargement
+        document.addEventListener('DOMContentLoaded', () => {
+            // Délai pour l'animation des éléments
+            setTimeout(() => {
+                document.querySelectorAll('.animate__delay-1s').forEach(el => {
+                    el.style.opacity = 1;
+                });
+            }, 1000);
+            
+            // Gestion du toast
+            const toast = document.getElementById('toast');
+            if (toast) {
+                setTimeout(() => {
+                    toast.classList.remove('is-hidden');
+                }, 1500);
+                
+                document.getElementById('close-toast').addEventListener('click', () => {
+                    toast.classList.add('animate__fadeOutRight');
+                    setTimeout(() => toast.classList.add('is-hidden'), 500);
+                });
+            }
+        });
+    </script>
+</body>
+</html>

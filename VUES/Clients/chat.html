@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="../../assets/css/bulma.min.css">
+    <link rel="stylesheet" href="../../assets/css/animate.min.css">
+    <link rel="stylesheet" href="../../assets/css/custom.css">
+    <link rel="stylesheet" href="../../assets/css/responsive.css">
+</head>
+<body>
+    <div class="chat-layout" id="chat-page">
+    <div class="chat-container">
+        <!-- Sidebar -->
+        <div class="chat-sidebar animate__animated animate__fadeInLeft">
+            <div class="chat-sidebar-header">
+                <h3 class="title is-5">Messages</h3>
+                <button class="button is-small is-primary">
+                    <i class="fas fa-plus"></i>
+                </button>
+            </div>
+
+            <div class="chat-conversations">
+                <!-- Liste conversations -->
+                <div class="conversation-item is-active">
+                    <figure class="image is-48x48">
+                        <img class="is-rounded" src="../../assets/images/avatars/user2.jpg">
+                    </figure>
+                    <div class="conversation-info">
+                        <p class="conversation-name">Sophie Martin</p>
+                        <p class="conversation-preview">Salut, ça va ?</p>
+                    </div>
+                    <span class="conversation-time">12:30</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main chat -->
+        <div class="chat-main animate__animated animate__fadeIn">
+            <div class="chat-header">
+                <div class="chat-partner">
+                    <figure class="image is-48x48">
+                        <img class="is-rounded" src="../../assets/images/avatars/user2.jpg">
+                    </figure>
+                    <div>
+                        <p class="title is-5">Sophie Martin</p>
+                        <p class="subtitle is-7">En ligne</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chat-messages">
+                <!-- Messages -->
+                <div class="message received">
+                    <div class="message-content">Salut, comment vas-tu ?</div>
+                    <div class="message-time">12:30</div>
+                </div>
+                <div class="message sent">
+                    <div class="message-content">Ça va bien merci !</div>
+                    <div class="message-time">12:32</div>
+                </div>
+            </div>
+
+            <div class="chat-input">
+                <div class="field has-addons">
+                    <div class="control is-expanded">
+                        <input class="input" type="text" placeholder="Écrire un message...">
+                    </div>
+                    <div class="control">
+                        <button class="button is-primary">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+                <script src="../../assets/js/utils.js"></script>
+                <script src="../../assets/js/router.js"></script>
+                <script src="../../assets/js/app.js"></script>
+
+
+
+</body>
+</html>

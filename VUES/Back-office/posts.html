@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Posts</title>
+    <link rel="stylesheet" href="assets\CSS\admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+                       
+</head>
+<body class="admin-layout">
+    <aside class="admin-sidebar animate__animated animate__fadeInLeft">
+        <div class="admin-sidebar-header">
+            <div class="admin-sidebar-title">
+                <i class="fas fa-shield-alt"></i>
+                <span>FriendSphere Admin</span>
+            </div>
+        </div>
+        <ul class="admin-menu">
+            <li><a href="#dashboard" class="is-active"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="#users"><i class="fas fa-users"></i> Utilisateurs</a></li>
+            <li><a href="#posts"><i class="fas fa-newspaper"></i> Publications</a></li>
+            <li><a href="#moderators"><i class="fas fa-user-tie"></i> Modérateurs</a></li>
+            <li><a href="#statistics"><i class="fas fa-chart-bar"></i> Statistiques</a></li>
+        </ul>
+    </aside>
+    
+    <main class="admin-main">
+        <header class="admin-header">
+            <h1 class="admin-title">
+                <i class="fas fa-newspaper mr-2"></i> Modération des publications
+            </h1>
+            <div class="tabs">
+                <ul>
+                    <li class="is-active"><a>Toutes</a></li>
+                    <li><a>Signalées</a></li>
+                    <li><a>En attente</a></li>
+                </ul>
+            </div>
+        </header>
+
+        <div class="admin-card">
+            <div class="admin-card-body">
+                <!-- Post exemple -->
+                <article class="media admin-post">
+                    <figure class="media-left">
+                        <p class="image is-64x64">
+                            <img class="is-rounded" src="../../assets/images/avatars/user2.jpg">
+                        </p>
+                    </figure>
+                    <div class="media-content">
+                        <div class="content">
+                            <p>
+                                <strong>Marie Dubois</strong> <small>@marie</small>
+                                <small>2h</small>
+                                <br>
+                                Contenu potentiellement inapproprié...
+                            </p>
+                        </div>
+                        <div class="post-actions">
+                            <button class="button is-small is-success">
+                                <i class="fas fa-check"></i> Approuver
+                            </button>
+                            <button class="button is-small is-danger">
+                                <i class="fas fa-times"></i> Supprimer
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users</title>
+    <link rel="stylesheet" href="assets\CSS\admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+                       
+</head>
+<body class="admin-layout">
+    <aside class="admin-sidebar animate__animated animate__fadeInLeft">
+        <div class="admin-sidebar-header">
+            <div class="admin-sidebar-title">
+                <i class="fas fa-shield-alt"></i>
+                <span>FriendSphere Admin</span>
+            </div>
+        </div>
+        <ul class="admin-menu">
+            <li><a href="#dashboard" class="is-active"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="#users"><i class="fas fa-users"></i> Utilisateurs</a></li>
+            <li><a href="#posts"><i class="fas fa-newspaper"></i> Publications</a></li>
+            <li><a href="#moderators"><i class="fas fa-user-tie"></i> Modérateurs</a></li>
+            <li><a href="#statistics"><i class="fas fa-chart-bar"></i> Statistiques</a></li>
+        </ul>
+    </aside>
+    
+    <main class="admin-main">
+        <header class="admin-header">
+            <h1 class="admin-title">
+                <i class="fas fa-users mr-2"></i> Gestion des utilisateurs
+            </h1>
+            <div class="admin-search">
+                <input class="input" type="text" placeholder="Rechercher un utilisateur...">
+            </div>
+        </header>
+
+        <div class="admin-card">
+            <div class="admin-card-header">
+                <div class="level">
+                    <div class="level-left">
+                        <h2>Tous les utilisateurs</h2>
+                    </div>
+                    <div class="level-right">
+                        <button class="button is-primary">
+                            <i class="fas fa-plus mr-2"></i> Ajouter
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="admin-card-body">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Avatar</th>
+                            <th>Nom</th>
+                            <th>Email</th>
+                            <th>Statut</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Ligne exemple -->
+                        <tr class="animate__animated animate__fadeIn">
+                            <td>42</td>
+                            <td>
+                                <figure class="image is-32x32">
+                                    <img class="is-rounded" src="../../assets/images/avatars/user1.jpg">
+                                </figure>
+                            </td>
+                            <td>Jean Dupont</td>
+                            <td>jean@example.com</td>
+                            <td><span class="tag is-success">Actif</span></td>
+                            <td>
+                                <button class="button is-small is-info">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="button is-small is-danger">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <!-- Pagination -->
+                <nav class="pagination is-centered mt-4">
+                    <a class="pagination-previous">Précédent</a>
+                    <a class="pagination-next">Suivant</a>
+                    <ul class="pagination-list">
+                        <li><a class="pagination-link is-current">1</a></li>
+                        <li><a class="pagination-link">2</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

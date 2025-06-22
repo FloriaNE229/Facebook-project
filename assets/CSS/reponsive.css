@@ -1,0 +1,129 @@
+/* ========== DESIGN RESPONSIVE ========== */
+@import '../../assets/css/animate.min.css';
+:root {
+    --gradient-primary: linear-gradient(135deg, #4361ee 0%, #3a0ca3 100%);
+    --gradient-secondary: linear-gradient(135deg, #f72585 0%, #b5179e 100%);
+}
+
+/* Mobile (< 768px) */
+@media screen and (max-width: 768px) {
+    /* Navbar transformable */
+    .navbar-menu {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 80%;
+        height: 100vh;
+        background: var(--gradient-primary);
+        transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        z-index: 100;
+    }
+
+    .navbar-menu.is-active {
+        left: 0;
+        box-shadow: 10px 0 30px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Cartes adaptatives */
+    .auth-card, .profile-card {
+        border-radius: 0;
+        margin: 0 !important;
+        height: 100vh;
+    }
+
+    /* Chat plein écran */
+    .chat-container {
+        flex-direction: column-reverse;
+    }
+    .chat-sidebar {
+        height: 40vh;
+        overflow-y: auto;
+    }
+}
+
+/* Tablette (768px - 1023px) */
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+    /* Profil en colonnes */
+    .profile-content .columns {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+    }
+
+    /* Chat optimisé */
+    .chat-main {
+        border-left: 1px solid rgba(255, 255, 255, 0.1);
+    }
+}
+
+/* Desktop (≥ 1024px) - Effets premium */
+@media screen and (min-width: 1024px) {
+    /* Hover élégant */
+    .friend-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(67, 97, 238, 0.2);
+    }
+
+    /* Animation des messages */
+    .message.received {
+        animation: messageIn 0.3s ease-out;
+    }
+}
+
+@keyframes messageIn {
+    from { transform: translateX(-20px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+
+/* Mobile : Petits écrans avec style */
+@media (max-width: 768px) {
+    .auth-card {
+        backdrop-filter: blur(10px);
+        background: rgba(255, 255, 255, 0.9) !important;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .profile-avatar {
+        box-shadow: 0 0 0 3px var(--primary), 
+                   0 0 20px rgba(67, 97, 238, 0.4);
+    }
+}
+
+/* Tablette : Adaptations élégantes */
+@media (min-width: 769px) and (max-width: 1023px) {
+    .chat-message {
+        backdrop-filter: blur(5px);
+        background: rgba(255, 255, 255, 0.7) !important;
+    }
+}
+
+/* Desktop : Effets wow */
+@media (min-width: 1024px) {
+    .friend-card:hover {
+        transform: translateY(-5px) rotate(1deg);
+        box-shadow: 0 15px 30px -5px rgba(67, 97, 238, 0.3);
+    }
+
+    .navbar-item::after {
+        content: '';
+        display: block;
+        width: 0;
+        height: 2px;
+        background: var(--gradient-primary);
+        transition: width 0.3s ease;
+    }
+
+    .navbar-item:hover::after {
+        width: 100%;
+    }
+}
+
+/* Animations spécifiques */
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+.float-effect {
+    animation: float 3s ease-in-out infinite;
+}

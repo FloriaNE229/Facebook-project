@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="../../assets/css/bulma.min.css">
+    <link rel="stylesheet" href="../../assets/css/animate.min.css">
+    <link rel="stylesheet" href="../../assets/css/custom.css">
+    <link rel="stylesheet" href="../../assets/css/responsive.css">
+</head>
+<body>
+    <div class="auth-layout" id="login-page">
+    <div class="auth-card animate__animated animate__fadeIn">
+        <div class="auth-card-header has-text-centered">
+            <img src="../../assets/images/ui/logo.png" alt="Logo" class="auth-logo">
+            <h1 class="title is-3 mt-4">Connexion</h1>
+        </div>
+        <div class="auth-card-body">
+            <form id="login-form" class="auth-form">
+                <div class="field">
+                    <div class="control has-icons-left">
+                        <input class="input" type="email" placeholder="Email" required>
+                        <span class="icon is-left"><i class="fas fa-envelope"></i></span>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="control has-icons-left">
+                        <input class="input" type="password" placeholder="Mot de passe" required>
+                        <span class="icon is-left"><i class="fas fa-lock"></i></span>
+                    </div>
+                </div>
+                <div class="field">
+                    <button type="submit" class="button is-primary is-fullwidth mt-5">
+                        <i class="fas fa-sign-in-alt mr-2"></i>Se connecter
+                    </button>
+                </div>
+            </form>
+            <div class="auth-footer has-text-centered mt-5">
+                <a href="#register" class="has-text-link">Créer un compte</a> • 
+                <a href="#reset-password" class="has-text-link">Mot de passe oublié ?</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+                <script src="../../assets/js/utils.js"></script>
+                <script src="../../assets/js/router.js"></script>
+                <script src="../../assets/js/app.js"></script>
+                
+
+</body>
+</html>

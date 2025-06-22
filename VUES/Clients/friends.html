@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="../../assets/css/bulma.min.css">
+    <link rel="stylesheet" href="../../assets/css/animate.min.css">
+    <link rel="stylesheet" href="../../assets/css/custom.css">
+    <link rel="stylesheet" href="../../assets/css/responsive.css">
+</head>
+<body>
+    <div class="friends-layout" id="friends-page">
+    <div class="container">
+        <div class="box animate__animated animate__fadeIn">
+            <div class="tabs is-boxed">
+                <ul>
+                    <li class="is-active"><a href="#friends">Mes Amis</a></li>
+                    <li><a href="#friend-requests">Demandes</a></li>
+                    <li><a href="#friends-suggestions">Suggestions</a></li>
+                </ul>
+            </div>
+
+            <div class="friends-content mt-5">
+                <div class="friends-search field has-addons">
+                    <div class="control is-expanded">
+                        <input class="input" type="text" placeholder="Rechercher des amis...">
+                    </div>
+                    <div class="control">
+                        <button class="button is-primary">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="friends-list mt-5">
+                    <!-- Liste d'amis -->
+                    <div class="friends-list-empty has-text-centered py-6">
+                        <i class="fas fa-user-friends fa-3x has-text-grey-light"></i>
+                        <p class="title is-5 mt-4">Vous n'avez pas encore d'amis</p>
+                        <a href="#friends-suggestions" class="button is-primary is-outlined mt-3">
+                            Trouver des amis
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+                <script src="../../assets/js/utils.js"></script>
+                <script src="../../assets/js/router.js"></script>
+                <script src="../../assets/js/app.js"></script>
+
+
+</body>
+</html>
