@@ -103,3 +103,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 });
+
+// Après authentification réussie
+window.currentUser = {
+    id: userData.id,
+    
+};

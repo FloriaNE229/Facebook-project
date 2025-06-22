@@ -1,85 +1,215 @@
+<?php
+session_start();
+$currentLang = $_SESSION['lang'] ?? 'fr'; // Langue par défaut
+?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<?= $currentLang ?>">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title data-i18n="settings_title">Paramètres</title>
 
+    <!-- CSS -->
     <link rel="stylesheet" href="../../assets/css/bulma.min.css">
     <link rel="stylesheet" href="../../assets/css/animate.min.css">
     <link rel="stylesheet" href="../../assets/css/custom.css">
     <link rel="stylesheet" href="../../assets/css/responsive.css">
 
+    <style>
+        /* Variables pour les thèmes */
+        :root {
+            --background-light: #f0f2f5;
+            --card-light: #ffffff;
+            --text-light: #050505;
+            --border-light: #dddfe2;
+        }
+
+        .dark-mode {
+            --background-dark: #18191a;
+            --card-dark: #242526;
+            --text-dark: #e4e6eb;
+            --border-dark: #3e4042;
+        }
+
+        /* Application des variables */
+        body {
+            background-color: var(--background-light, #f0f2f5);
+            color: var(--text-light, #050505);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .dark-mode body {
+            background-color: var(--background-dark);
+            color: var(--text-dark);
+        }
+
+        .box {
+            background-color: var(--card-light);
+            border-color: var(--border-light);
+        }
+
+        .dark-mode .box {
+            background-color: var(--card-dark);
+            border-color: var(--border-dark);
+        }
+    </style>
 </head>
 <body>
     <div class="settings-layout" id="settings-page">
-    <div class="container">
-        <div class="columns">
-            <div class="column is-3">
-                <aside class="menu settings-menu animate__animated animate__fadeInLeft">
-                    <p class="menu-label">Paramètres</p>
-                    <ul class="menu-list">
-                        <li><a href="#settings-account" class="is-active">Compte</a></li>
-                        <li><a href="#settings-privacy">Confidentialité</a></li>
-                        <li><a href="#settings-notifications">Notifications</a></li>
-                        <li><a href="#settings-security">Sécurité</a></li>
-                    </ul>
-                </aside>
-            </div>
+        <div class="container">
+            <div class="columns">
+                <div class="column is-3">
+                    <aside class="menu settings-menu animate__animated animate__fadeInLeft">
+                        <p class="menu-label" data-i18n="settings">Paramètres</p>
+                        <ul class="menu-list">
+                            <li><a href="#settings-account" class="is-active" data-i18n="account">Compte</a></li>
+                            <li><a href="#settings-privacy" data-i18n="privacy">Confidentialité</a></li>
+                            <li><a href="#settings-notifications" data-i18n="notifications">Notifications</a></li>
+                            <li><a href="#settings-security" data-i18n="security">Sécurité</a></li>
+                            <li><a href="#settings-appearance" data-i18n="appearance">Apparence</a></li>
+                        </ul>
+                    </aside>
+                </div>
 
-            <div class="column is-9">
-                <div class="box settings-content animate__animated animate__fadeIn">
-                    <!-- Section Compte -->
-                    <div id="settings-account" class="settings-section">
-                        <h3 class="title is-4"><i class="fas fa-user-cog mr-2"></i>Paramètres du compte</h3>
-                        
-                        <form id="account-settings-form">
+                <div class="column is-9">
+                    <div class="box settings-content animate__animated animate__fadeIn">
+                        <!-- Section Compte -->
+                        <div id="settings-account" class="settings-section">
+                            <h3 class="title is-4">
+                                <i class="fas fa-user-cog mr-2"></i>
+                                <span data-i18n="account_settings">Paramètres du compte</span>
+                            </h3>
+                            
+                            <form id="account-settings-form">
+                                <!-- Vos champs de compte ici -->
+                            </form>
+                        </div>
+
+                        <!-- Section Apparence -->
+                        <div id="settings-appearance" class="settings-section" style="display:none;">
+                            <h3 class="title is-4">
+                                <i class="fas fa-palette mr-2"></i>
+                                <span data-i18n="appearance_settings">Apparence</span>
+                            </h3>
+                            
+                            <!-- Sélecteur de thème -->
                             <div class="field">
-                                <label class="label">Langue</label>
+                                <label class="label" data-i18n="theme">Thème</label>
+                                <div class="control">
+                                    <label class="radio">
+                                        <input type="radio" name="theme" id="theme-light" value="light">
+                                        <span data-i18n="light_theme">Clair</span>
+                                    </label>
+                                    <label class="radio">
+                                        <input type="radio" name="theme" id="theme-dark" value="dark">
+                                        <span data-i18n="dark_theme">Sombre</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Sélecteur de langue -->
+                            <div class="field">
+                                <label class="label" data-i18n="language">Langue</label>
                                 <div class="control">
                                     <div class="select is-fullwidth">
-                                        <select>
-                                            <option>Français</option>
-                                            <option>English</option>
+                                        <select id="language-selector">
+                                            <option value="fr" <?= $currentLang === 'fr' ? 'selected' : '' ?>>Français</option>
+                                            <option value="en" <?= $currentLang === 'en' ? 'selected' : '' ?>>English</option>
+                                            <option value="es" <?= $currentLang === 'es' ? 'selected' : '' ?>>Español</option>
                                         </select>
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="field">
-                                <label class="label">Thème</label>
-                                <div class="control">
-                                    <label class="radio">
-                                        <input type="radio" name="theme" checked>
-                                        Clair
-                                    </label>
-                                    <label class="radio">
-                                        <input type="radio" name="theme">
-                                        Sombre
-                                    </label>
-                                </div>
-                            </div>
-
-                            <div class="field">
-                                <div class="control">
-                                    <button type="submit" class="button is-primary">
-                                        <i class="fas fa-save mr-2"></i>Enregistrer
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-                        
-                <script src="../../assets/js/utils.js"></script>
-                <script src="../../assets/js/router.js"></script>
-                <script src="../../assets/js/app.js"></script>
+    <!-- Scripts -->
+    <script src="../../assets/js/utils.js"></script>
+    <script src="../../assets/js/router.js"></script>
+    <script src="../../assets/js/app.js"></script>
+    <script src="../../assets/js/i18n.js"></script>
 
- 
+    <script>
+    // Gestion du changement de section
+    document.querySelectorAll('.menu-list a').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelectorAll('.settings-section').forEach(section => {
+                section.style.display = 'none';
+            });
+            document.querySelector(this.getAttribute('href')).style.display = 'block';
+        });
+    });
+
+    // Initialisation après chargement du DOM
+    document.addEventListener('DOMContentLoaded', () => {
+        // Affiche la première section par défaut
+        document.querySelector('.settings-section').style.display = 'block';
+
+        // Récupère les préférences depuis localStorage
+        const currentTheme = localStorage.getItem('fb-theme') || 'light';
+        const currentLang = localStorage.getItem('fb-lang') || '<?= $currentLang ?>';
+
+        // Met à jour les sélecteurs
+        document.getElementById(`theme-${currentTheme}`).checked = true;
+        document.getElementById('language-selector').value = currentLang;
+
+        // Applique le thème au chargement
+        if (currentTheme === 'dark') {
+            document.documentElement.classList.add('dark-mode');
+        }
+
+        // Écouteurs d'événements
+        document.querySelectorAll('input[name="theme"]').forEach(radio => {
+            radio.addEventListener('change', (e) => {
+                localStorage.setItem('fb-theme', e.target.value);
+                document.documentElement.classList.toggle('dark-mode', e.target.value === 'dark');
+                
+                // Envoi au serveur si utilisateur connecté
+                if (window.currentUser) {
+                    fetch('../../api/users/update-theme.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ 
+                            dark_mode: e.target.value === 'dark',
+                            user_id: window.currentUser.id 
+                        })
+                    });
+                }
+            });
+        });
+
+        document.getElementById('language-selector').addEventListener('change', (e) => {
+            const lang = e.target.value;
+            localStorage.setItem('fb-lang', lang);
+            
+            // Met à jour les traductions
+            if (window.I18n) {
+                I18n.changeLanguage(lang);
+            }
+
+            // Envoi au serveur si utilisateur connecté
+            if (window.currentUser) {
+                fetch('../../api/users/update-language.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ 
+                        lang: lang,
+                        user_id: window.currentUser.id 
+                    })
+                });
+            }
+        });
+    });
+    </script>
 </body>
 </html>
