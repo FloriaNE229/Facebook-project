@@ -1,72 +1,596 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-
-    <link rel="stylesheet" href="../../assets/css/bulma.min.css">
-    <link rel="stylesheet" href="../../assets/css/animate.min.css">
-    <link rel="stylesheet" href="../../assets/css/custom.css">
-    <link rel="stylesheet" href="../../assets/css/responsive.css">
+    <title>FriendSphere - Fil d'actualités</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #1877f2;
+            --primary-hover: #166fe5;
+            --secondary: #42b72a;
+            --bg-light: #f0f2f5;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        body {
+            background-color: var(--bg-light);
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+        
+        /* Header stylisé */
+        .hero-header {
+            background: linear-gradient(135deg, var(--primary) 0%, #1e3c72 100%);
+            box-shadow: var(--shadow-md);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .logo-text {
+            font-family: 'Arial Rounded MT Bold', sans-serif;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            letter-spacing: -0.5px;
+        }
+        
+        .navbar-item:hover {
+            background-color: rgba(255,255,255,0.1) !important;
+        }
+        
+        /* Animations personnalisées */
+        @keyframes floatIn {
+            0% { transform: translateY(20px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+        
+        .float-in {
+            animation: floatIn 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        
+        .new-post-pulse {
+            animation: pulse 1.5s ease-out;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(24, 119, 242, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(24, 119, 242, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(24, 119, 242, 0); }
+        }
+        
+        /* Cards stylisées */
+        .post-card {
+            border-radius: 12px;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .post-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+        
+        /* Réactions stylisées */
+        .reaction-tray {
+            display: none;
+            position: absolute;
+            bottom: 100%;
+            left: 0;
+            background: white;
+            border-radius: 50px;
+            padding: 5px 10px;
+            box-shadow: var(--shadow-md);
+            z-index: 10;
+        }
+        
+        .reaction-btn:hover .reaction-tray {
+            display: flex;
+        }
+        
+        .reaction-emoji {
+            transition: all 0.2s;
+            cursor: pointer;
+            font-size: 1.2em;
+            margin: 0 3px;
+        }
+        
+        .reaction-emoji:hover {
+            transform: scale(1.4) translateY(-5px);
+        }
+        
+        /* Badges */
+        .live-badge {
+            animation: pulse 2s infinite;
+        }
+    </style>
 </head>
 <body>
-    <div class="home-page animate__animated animate__fadeIn" data-page="home">
-    <!-- Barre de navigation avec animation -->
-    <nav class="navbar is-primary animate__animated animate__fadeInDown" role="navigation" aria-label="Menu principal">
-        <!-- ... contenu navbar inchangé ... -->
-    </nav>
-
-    <!-- Contenu principal avec animations progressives -->
-    <div class="container mt-4">
-        <div class="columns">
-            <!-- Colonne gauche - Animation d'entrée -->
-            <div class="column is-3 animate__animated animate__fadeInLeft animate__delay-1s">
-                <div class="box profile-card animate__animated animate__pulse animate__delay-2s">
-                    <!-- ... contenu profil ... -->
-                </div>
-            </div>
-
-            <!-- Colonne centrale - Animation principale -->
-            <div class="column is-6">
-                <!-- Création de post avec animation -->
-                <div class="box post-creator animate__animated animate__fadeInUp animate__delay-1s">
-                    <!-- ... formulaire de post ... -->
+    <!-- Header Premium -->
+    <header class="hero-header animate__animated animate__fadeInDown">
+        <nav class="navbar is-primary">
+            <div class="container">
+                <div class="navbar-brand">
+                    <a class="navbar-item" href="#">
+                        <span class="icon-text">
+                            <span class="icon">
+                                <i class="fas fa-users fa-lg"></i>
+                            </span>
+                            <span class="logo-text has-text-white has-text-weight-bold is-size-4">FriendSphere</span>
+                        </span>
+                    </a>
+                    
+                    <a role="button" class="navbar-burger has-text-white" aria-label="menu">
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                    </a>
                 </div>
                 
-                <!-- Liste des posts avec animation -->
-                <div id="posts-container" class="animate__animated animate__fadeIn animate__delay-1s">
-                    <!-- Les posts individuels auront leurs propres animations -->
+                <div class="navbar-menu">
+                    <div class="navbar-start">
+                        <a class="navbar-item has-text-white has-text-weight-semibold is-active">
+                            <i class="fas fa-home mr-2"></i> Accueil
+                        </a>
+                        <a class="navbar-item has-text-white has-text-weight-semibold">
+                            <i class="fas fa-user-friends mr-2"></i> Amis
+                        </a>
+                    </div>
+                    
+                    <div class="navbar-item is-expanded">
+                        <div class="field has-addons">
+                            <div class="control is-expanded">
+                                <input class="input is-rounded" type="text" placeholder="Rechercher sur FriendSphere...">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="navbar-end">
+                        <div class="navbar-item has-dropdown is-hoverable">
+                            <a class="navbar-link has-text-white">
+                                <span class="icon-text">
+                                    <span class="icon">
+                                        <i class="fas fa-bell"></i>
+                                    </span>
+                                    <span class="tag is-danger is-rounded is-small" style="position: absolute; top: 5px; right: 5px;">3</span>
+                                </span>
+                            </a>
+                            <div class="navbar-dropdown is-right is-boxed">
+                                <!-- Notifications -->
+                            </div>
+                        </div>
+                        
+                        <div class="navbar-item has-dropdown is-hoverable">
+                            <a class="navbar-link has-text-white">
+                                <figure class="image is-32x32 mr-2">
+                                    <img class="is-rounded" src="https://randomuser.me/api/portraits/men/32.jpg" alt="Profil">
+                                </figure>
+                            </a>
+                            <div class="navbar-dropdown is-right is-boxed">
+                                <a class="navbar-item">
+                                    <i class="fas fa-user mr-2"></i> Mon profil
+                                </a>
+                                <a class="navbar-item">
+                                    <i class="fas fa-cog mr-2"></i> Paramètres
+                                </a>
+                                <hr class="navbar-divider">
+                                <a class="navbar-item">
+                                    <i class="fas fa-sign-out-alt mr-2"></i> Déconnexion
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </nav>
+    </header>
 
-            <!-- Colonne droite - Animation d'entrée -->
-            <div class="column is-3 animate__animated animate__fadeInRight animate__delay-1s">
-                <div class="box animate__animated animate__fadeInUp animate__delay-2s">
-                    <h3 class="title is-5">Suggestions d'amis</h3>
-                    <!-- ... contenu suggestions ... -->
+    <!-- Contenu principal -->
+    <main class="section">
+        <div class="container">
+            <div class="columns is-desktop is-variable is-4">
+                <!-- Colonne gauche - Profil -->
+                <div class="column is-3">
+                    <div class="box profile-card animate__animated animate__fadeInLeft">
+                        <article class="media">
+                            <figure class="media-left">
+                                <p class="image is-64x64">
+                                    <img class="is-rounded" src="https://randomuser.me/api/portraits/men/32.jpg" alt="Profil">
+                                </p>
+                            </figure>
+                            <div class="media-content">
+                                <div class="content">
+                                    <p class="has-text-weight-bold">Jean Dupont</p>
+                                    <p class="is-size-7">@jeandupont</p>
+                                </div>
+                            </div>
+                        </article>
+                        
+                        <hr>
+                        
+                        <div class="buttons are-small is-flex">
+                            <button class="button is-primary is-flex-grow-1">
+                                <span class="icon">
+                                    <i class="fas fa-user-edit"></i>
+                                </span>
+                                <span>Modifier</span>
+                            </button>
+                            <button class="button is-light is-flex-grow-1">
+                                <span class="icon">
+                                    <i class="fas fa-cog"></i>
+                                </span>
+                                <span>Paramètres</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="box mt-4 animate__animated animate__fadeInLeft animate__delay-1s">
+                        <h3 class="title is-5 has-text-grey">Amis en ligne <span class="tag is-primary is-rounded live-badge">LIVE</span></h3>
+                        <div class="friends-online">
+                            <!-- Amis en ligne -->
+                        </div>
+                    </div>
                 </div>
                 
-                <div class="box mt-4 animate__animated animate__fadeInUp animate__delay-3s">
-                    <h3 class="title is-5">Événements</h3>
-                    <!-- ... contenu événements ... -->
+                <!-- Colonne centrale - Fil d'actualités -->
+                <div class="column is-6">
+                    <!-- Création de post -->
+                    <div class="box post-creator animate__animated animate__fadeInUp">
+                        <div class="field">
+                            <div class="control">
+                                <textarea class="textarea is-medium" placeholder="Quoi de neuf, Jean ?" rows="2"></textarea>
+                            </div>
+                        </div>
+                        <div class="field is-grouped is-grouped-right">
+                            <div class="control">
+                                <button class="button is-small">
+                                    <span class="icon">
+                                        <i class="fas fa-image"></i>
+                                    </span>
+                                </button>
+                            </div>
+                            <div class="control">
+                                <button class="button is-small">
+                                    <span class="icon">
+                                        <i class="fas fa-video"></i>
+                                    </span>
+                                </button>
+                            </div>
+                            <div class="control">
+                                <button class="button is-primary">
+                                    <span class="icon">
+                                        <i class="fas fa-paper-plane"></i>
+                                    </span>
+                                    <span>Publier</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Filtres -->
+                    <div class="box filters animate__animated animate__fadeIn">
+                        <div class="tabs is-centered is-toggle is-fullwidth">
+                            <ul>
+                                <li class="is-active">
+                                    <a>
+                                        <span class="icon is-small"><i class="fas fa-home"></i></span>
+                                        <span>Pour vous</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <span class="icon is-small"><i class="fas fa-user-friends"></i></span>
+                                        <span>Amis</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <span class="icon is-small"><i class="fas fa-star"></i></span>
+                                        <span>Favoris</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Liste des posts -->
+                    <div id="posts-container" class="animate__animated animate__fadeIn">
+                        <!-- Les posts seront injectés ici -->
+                    </div>
+                    
+                    <!-- Chargement infini -->
+                    <div id="loading-spinner" class="has-text-centered py-6" style="display: none;">
+                        <span class="icon is-large has-text-primary">
+                            <i class="fas fa-spinner fa-pulse fa-2x"></i>
+                        </span>
+                    </div>
+                </div>
+                
+                <!-- Colonne droite - Suggestions -->
+                <div class="column is-3">
+                    <div class="box animate__animated animate__fadeInRight">
+                        <h3 class="title is-5 has-text-grey">Suggestions</h3>
+                        <!-- Suggestions d'amis -->
+                    </div>
+                    
+                    <div class="box mt-4 animate__animated animate__fadeInRight animate__delay-1s">
+                        <h3 class="title is-5 has-text-grey">Événements</h3>
+                        <!-- Événements à venir -->
+                    </div>
+                    
+                    <div class="box mt-4 animate__animated animate__fadeInRight animate__delay-2s">
+                        <h3 class="title is-5 has-text-grey">Groupes</h3>
+                        <!-- Groupes suggérés -->
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
+    </main>
 
-<!-- Template pour un post avec classes d'animation -->
-<template id="post-template">
-    <div class="box post animate__animated animate__fadeInUp">
-        <!-- ... structure du post ... -->
-    </div>
-</template>
+    <!-- Template de post -->
+    <template id="post-template">
+        <div class="box post-card float-in mb-4">
+            <article class="media">
+                <div class="media-left">
+                    <figure class="image is-48x48">
+                        <img class="is-rounded" src="" alt="Avatar">
+                    </figure>
+                </div>
+                <div class="media-content">
+                    <div class="content">
+                        <p>
+                            <strong class="post-author"></strong>
+                            <small class="post-time has-text-grey"></small>
+                            <br>
+                            <span class="post-text"></span>
+                        </p>
+                        <div class="post-image-container mt-3" style="display: none;">
+                            <img class="post-image" style="border-radius: 8px; max-height: 500px; width: 100%; object-fit: cover;">
+                        </div>
+                    </div>
+                    <nav class="level is-mobile post-stats">
+                        <div class="level-left">
+                            <div class="level-item">
+                                <span class="icon-text">
+                                    <span class="icon is-small has-text-primary">
+                                        <i class="fas fa-thumbs-up"></i>
+                                    </span>
+                                    <span class="like-count has-text-grey is-size-7">0</span>
+                                </span>
+                            </div>
+                            <div class="level-item">
+                                <span class="has-text-grey is-size-7 comment-count">0 commentaires</span>
+                            </div>
+                        </div>
+                    </nav>
+                    <hr class="mt-1 mb-2">
+                    <div class="field is-grouped is-grouped-centered">
+                        <div class="control reaction-btn">
+                            <button class="button is-white is-small">
+                                <span class="icon-text">
+                                    <span class="icon">
+                                        <i class="far fa-thumbs-up"></i>
+                                    </span>
+                                    <span>J'aime</span>
+                                </span>
+                            </button>
+                            <div class="reaction-tray">
+                                <span class="reaction-emoji" data-reaction="like">👍</span>
+                                <span class="reaction-emoji" data-reaction="love">❤️</span>
+                                <span class="reaction-emoji" data-reaction="haha">😆</span>
+                                <span class="reaction-emoji" data-reaction="wow">😲</span>
+                                <span class="reaction-emoji" data-reaction="sad">😢</span>
+                                <span class="reaction-emoji" data-reaction="angry">😠</span>
+                            </div>
+                        </div>
+                        <div class="control">
+                            <button class="button is-white is-small">
+                                <span class="icon-text">
+                                    <span class="icon">
+                                        <i class="far fa-comment"></i>
+                                    </span>
+                                    <span>Commenter</span>
+                                </span>
+                            </button>
+                        </div>
+                        <div class="control">
+                            <button class="button is-white is-small">
+                                <span class="icon-text">
+                                    <span class="icon">
+                                        <i class="fas fa-share"></i>
+                                    </span>
+                                    <span>Partager</span>
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </template>
 
-                <script src="../../assets/js/utils.js"></script>
-                <script src="../../assets/js/router.js"></script>
-                <script src="../../assets/js/app.js"></script>
-
-
+    <!-- Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Simulateur de flux temps réel
+            const postsContainer = document.getElementById('posts-container');
+            const postTemplate = document.getElementById('post-template');
+            
+            // Données des amis
+            const friends = [
+                { name: "Marie Martin", avatar: "https://randomuser.me/api/portraits/women/44.jpg" },
+                { name: "Thomas Leroy", avatar: "https://randomuser.me/api/portraits/men/22.jpg" },
+                { name: "Sophie Dubois", avatar: "https://randomuser.me/api/portraits/women/68.jpg" },
+                { name: "Alexandre Petit", avatar: "https://randomuser.me/api/portraits/men/75.jpg" }
+            ];
+            
+            // Exemples de posts
+            const samplePosts = [
+                { 
+                    text: "Juste terminé mon dernier projet ! 🎉 Qui veut voir le résultat ?", 
+                    image: "https://source.unsplash.com/random/800x600/?coding"
+                },
+                { 
+                    text: "Magnifique journée à la plage aujourd'hui. Le soleil fait du bien ! ☀️🏖️", 
+                    image: "https://source.unsplash.com/random/800x600/?beach"
+                },
+                { 
+                    text: "Je recommande ce nouveau restaurant en ville. La nourriture était incroyable ! 🍽️", 
+                    image: null 
+                },
+                { 
+                    text: "Quelqu'un a des recommandations de bons films à regarder ce weekend ? 🎬", 
+                    image: null 
+                }
+            ];
+            
+            // Créer un nouveau post
+            function createPost(author, avatar, text, imageUrl = null) {
+                const clone = postTemplate.content.cloneNode(true);
+                const postElement = clone.querySelector('.post-card');
+                
+                // Remplir les données
+                clone.querySelector('.post-author').textContent = author;
+                clone.querySelector('img[alt="Avatar"]').src = avatar;
+                clone.querySelector('.post-time').textContent = "à l'instant";
+                clone.querySelector('.post-text').textContent = text;
+                
+                if (imageUrl) {
+                    const container = clone.querySelector('.post-image-container');
+                    const img = clone.querySelector('.post-image');
+                    img.src = imageUrl;
+                    container.style.display = 'block';
+                }
+                
+                // Effet nouveau post
+                postElement.classList.add('new-post-pulse');
+                
+                // Ajouter en haut du fil
+                if (postsContainer.firstChild) {
+                    postsContainer.insertBefore(clone, postsContainer.firstChild);
+                } else {
+                    postsContainer.appendChild(clone);
+                }
+                
+                // Gestion des réactions
+                const reactionBtn = postElement.querySelector('.reaction-btn');
+                const reactionTray = postElement.querySelector('.reaction-tray');
+                
+                reactionBtn.addEventListener('mouseenter', () => {
+                    reactionTray.style.display = 'flex';
+                });
+                
+                reactionBtn.addEventListener('mouseleave', () => {
+                    reactionTray.style.display = 'none';
+                });
+                
+                // Animation hover sur les emojis
+                postElement.querySelectorAll('.reaction-emoji').forEach(emoji => {
+                    emoji.addEventListener('mouseenter', () => {
+                        emoji.style.transform = 'scale(1.4) translateY(-5px)';
+                    });
+                    
+                    emoji.addEventListener('mouseleave', () => {
+                        emoji.style.transform = 'scale(1)';
+                    });
+                    
+                    emoji.addEventListener('click', () => {
+                        const reaction = emoji.dataset.reaction;
+                        const likeCount = postElement.querySelector('.like-count');
+                        likeCount.textContent = parseInt(likeCount.textContent) + 1;
+                        
+                        // Changer l'icône "J'aime" selon la réaction
+                        const likeIcon = postElement.querySelector('.fa-thumbs-up');
+                        likeIcon.classList.remove('far', 'fa-thumbs-up');
+                        
+                        switch(reaction) {
+                            case 'like':
+                                likeIcon.classList.add('fas', 'fa-thumbs-up');
+                                break;
+                            case 'love':
+                                likeIcon.classList.add('fas', 'fa-heart');
+                                likeIcon.style.color = '#f06595';
+                                break;
+                            case 'haha':
+                                likeIcon.classList.add('fas', 'fa-laugh-squint');
+                                likeIcon.style.color = '#fcc419';
+                                break;
+                            // Ajouter d'autres cas selon les réactions
+                        }
+                        
+                        reactionTray.style.display = 'none';
+                    });
+                });
+            }
+            
+            // Simuler l'arrivée de nouveaux posts en temps réel
+            setInterval(() => {
+                const randomFriend = friends[Math.floor(Math.random() * friends.length)];
+                const randomPost = samplePosts[Math.floor(Math.random() * samplePosts.length)];
+                
+                createPost(
+                    randomFriend.name,
+                    randomFriend.avatar,
+                    randomPost.text,
+                    randomPost.image
+                );
+            }, 8000); // Nouveau post toutes les 8 secondes
+            
+            // Chargement initial
+            for (let i = 0; i < 4; i++) {
+                const friend = friends[i % friends.length];
+                const post = samplePosts[i % samplePosts.length];
+                
+                createPost(
+                    friend.name,
+                    friend.avatar,
+                    post.text,
+                    post.image
+                );
+            }
+            
+            // Chargement infini
+            window.addEventListener('scroll', function() {
+                if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 500) {
+                    document.getElementById('loading-spinner').style.display = 'block';
+                    
+                    // Simuler un chargement
+                    setTimeout(() => {
+                        for (let i = 0; i < 2; i++) {
+                            const friend = friends[Math.floor(Math.random() * friends.length)];
+                            const post = samplePosts[Math.floor(Math.random() * samplePosts.length)];
+                            
+                            createPost(
+                                friend.name,
+                                friend.avatar,
+                                post.text,
+                                post.image
+                            );
+                        }
+                        document.getElementById('loading-spinner').style.display = 'none';
+                    }, 1500);
+                }
+            });
+            
+            // Burger menu pour mobile
+            const navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+            
+            navbarBurgers.forEach(el => {
+                el.addEventListener('click', () => {
+                    const target = el.dataset.target;
+                    const targetEl = document.getElementById(target);
+                    
+                    el.classList.toggle('is-active');
+                    targetEl.classList.toggle('is-active');
+                });
+            });
+        });
+    </script>
 </body>
 </html>

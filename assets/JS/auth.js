@@ -200,16 +200,14 @@ class AuthSystem {
             localStorage.setItem('authToken', data.token);
             localStorage.setItem('user', JSON.stringify(data.user));
             
-            // Redirection après un délai pour voir le message
+            // Redirection vers la page d'accueil après connexion
             await new Promise(resolve => setTimeout(resolve, 1500));
-            
-            const redirectTo = new URLSearchParams(window.location.search).get('redirect') || '#home';
-            window.location.hash = redirectTo;
+            window.location.href = 'VUES/Clients/home.html';
         } else {
-            // Après inscription, rediriger vers la page de connexion
+            // Après inscription, rediriger vers la page d'édition de profil
             form.reset();
             await new Promise(resolve => setTimeout(resolve, 1500));
-            window.location.hash = '#login';
+            window.location.href = 'VUES/Clients/edit-profile.html';
         }
     }
 
@@ -229,9 +227,9 @@ class AuthSystem {
         
         this.showToast('Vous avez été déconnecté avec succès', 'is-info');
         
-        // Redirection après un délai
+        // Redirection vers la page de connexion après déconnexion
         setTimeout(() => {
-            window.location.hash = '#login';
+            window.location.href = 'index.html';
         }, 1000);
     }
 
@@ -239,9 +237,9 @@ class AuthSystem {
         localStorage.removeItem('authToken');
         this.showToast('Votre session a expiré - Veuillez vous reconnecter', 'is-warning');
         
-        if (!window.location.hash.includes('login')) {
+        if (!window.location.href.includes('index.html')) {
             setTimeout(() => {
-                window.location.hash = '#login';
+                window.location.href = 'index.html';
             }, 1500);
         }
     }
@@ -273,4 +271,4 @@ class AuthSystem {
 }
 
 // Initialisation
-document.addEventListener('DOMContentLoaded', () => AuthSystem.init());
+document.addEventListener('DOMContentLoaded', () => AuthSystem.init());e

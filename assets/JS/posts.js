@@ -59,7 +59,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 this.toggleDarkMode();
             });
 
-            // Réduire les animations si l'utilisateur le préfère
             window.matchMedia('(prefers-reduced-motion: reduce)').addEventListener('change', (e) => {
                 this.state.animationsEnabled = !e.matches;
             });
@@ -82,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
             nextPage.classList.add('active');
             await this.animateElement(nextPage, 'fadeIn');
             
-            // Mise à jour de l'URL sans rechargement
+            // Mise à jour de l'URL
             history.pushState(null, '', `#${page}`);
         },
 
@@ -131,7 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
             this.renderPosts();
         },
 
-        // Rendu des posts avec animations
+    
         renderPosts() {
             const container = document.getElementById('posts-container');
             if (!container) return;

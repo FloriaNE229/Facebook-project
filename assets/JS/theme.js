@@ -3,20 +3,19 @@
  */
 class ThemeManager {
     static init() {
-        // 1. Vérifie le localStorage
+    
         this.isDark = localStorage.getItem('fb-theme') === 'dark';
         
-        // 2. Applique le thème initial
+
         this.applyTheme();
         
-        // 3. Configure les écouteurs
+    
         this.setupEventListeners();
     }
 
     static applyTheme() {
         document.documentElement.classList.toggle('dark-mode', this.isDark);
         
-        // Pour Bulma (override des variables CSS)
         if (this.isDark) {
             document.documentElement.style.setProperty('--scheme-main', '#242526');
             document.documentElement.style.setProperty('--background', '#18191a');

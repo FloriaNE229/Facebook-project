@@ -22,8 +22,7 @@ class I18n {
             const key = el.getAttribute('data-i18n');
             el.textContent = this.translations[key] || key;
         });
-        
-        // Met à jour la balise <html>
+
         document.documentElement.lang = this.lang;
     }
 
@@ -32,7 +31,7 @@ class I18n {
         localStorage.setItem('fb-lang', lang);
         this.loadTranslations();
         
-        // Sauvegarde côté serveur si connecté
+    
         if (window.currentUser) {
             fetch('/api/users/update-language.php', {
                 method: 'POST',

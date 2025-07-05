@@ -1,83 +1,661 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-
+    <title>Modifier le profil - FriendSphere</title>
     <link rel="stylesheet" href="../../assets/css/bulma.min.css">
     <link rel="stylesheet" href="../../assets/css/animate.min.css">
-    <link rel="stylesheet" href="../../assets/css/custom.css">
-    <link rel="stylesheet" href="../../assets/css/responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+    --primary: #4361ee;  
+    --secondary: #3a0ca3; 
+    --accent: #f72585;    
+    --primary-light: #eef2ff;
+    --gradient: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    --shadow: 0 5px 15px rgba(67, 97, 238, 0.1);
+}
 
+
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+        }
+
+        .edit-profile-card {
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .edit-profile-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(67, 97, 238, 0.15);
+}
+
+        .profile-header {
+            background: var(--gradient);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .profile-section {
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .profile-section:last-child {
+            border-bottom: none;
+        }
+
+        .profile-section-title {
+            font-size: 1.25rem;
+            margin-bottom: 1.75rem;
+            color: var(--secondary);
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        .profile-section-title i {
+            margin-right: 0.75rem;
+            background: var(--primary-light);
+            padding: 0.5rem;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+        }
+
+        .file-cta {
+            background: var(--gradient);
+            color: white;
+            border: none;
+            transition: all 0.3s ease;
+        }
+
+        .file-cta:hover {
+            opacity: 0.9;
+        }
+
+        .save-btn {
+    background: var(--accent); 
+    color: white;
+    border: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.save-btn:hover {
+background: #d91a6d; 
+transform: translateY(-2px);
+box-shadow: 0 5px 15px rgba(247, 37, 133, 0.3);
+}
+
+        .cancel-btn {
+            transition: all 0.3s ease;
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+
+        .cancel-btn:hover {
+            transform: translateY(-2px);
+            background-color: #f5f5f5;
+        }
+
+        .profile-pic-preview {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            display: none;
+            margin: 0 auto 1.5rem;
+        }
+
+        .input, .textarea, .select select {
+            transition: all 0.3s ease;
+            border-radius: 6px;
+        }
+
+        .input:focus, .textarea:focus, .select select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 0.125em rgba(72, 95, 199, 0.25);
+        }
+
+        .label {
+            font-weight: 500;
+            color: #4a4a4a;
+        }
+
+        .help {
+            font-size: 0.85rem;
+        }
+    </style>
 </head>
 <body>
-    <div class="edit-profile-layout" id="edit-profile-page">
-    <div class="container">
-        <div class="columns is-centered">
-            <div class="column is-8">
-                <div class="box animate__animated animate__fadeIn">
-                    <h1 class="title is-3 has-text-centered">
-                        <i class="fas fa-user-edit mr-2"></i>Modifier le profil
-                    </h1>
-
-                    <form id="edit-profile-form">
-                        <div class="field">
-                            <label class="label">Photo de profil</label>
-                            <div class="file has-name is-boxed">
-                                <label class="file-label">
-                                    <input class="file-input" type="file" accept="image/*">
-                                    <span class="file-cta">
-                                        <span class="file-icon"><i class="fas fa-upload"></i></span>
-                                        <span class="file-label">Choisir une image...</span>
-                                    </span>
-                                    <span class="file-name">Aucun fichier sélectionné</span>
-                                </label>
-                            </div>
+    <section class="section">
+        <div class="container">
+            <div class="columns is-centered">
+                <div class="column is-10-tablet is-8-desktop">
+                    <div class="edit-profile-card">
+                        <div class="profile-header">
+                            <h1 class="title is-3 has-text-white">
+                                <i class="fas fa-user-edit mr-2"></i>Editer mon profile 
+                            </h1>
+                            <p class="subtitle is-6 has-text-white-bis">
+                                Personnalisez votre profil pour une meilleure expérience
+                            </p>
                         </div>
 
-                        <div class="field">
-                            <label class="label">Nom complet</label>
-                            <div class="control">
-                                <input class="input" type="text" value="Jean Dupont">
-                            </div>
-                        </div>
+                        <div class="box p-5">
+                            <form id="edit-profile-form">
+                                <!-- Photo de profil -->
+                                <div class="profile-section has-text-centered">
+                                    <img id="profile-pic-preview" class="profile-pic-preview" src="" alt="Preview">
+                                    <div class="file is-centered has-name is-boxed">
+                                        <label class="file-label">
+                                            <input class="file-input" type="file" id="profile-pic" accept="image/*">
+                                            <span class="file-cta">
+                                                <span class="file-icon"><i class="fas fa-cloud-upload-alt"></i></span>
+                                                <span class="file-label">Choisir une photo...</span>
+                                            </span>
+                                            <span class="file-name">Aucun fichier sélectionné</span>
+                                        </label>
+                                    </div>
+                                    <p class="help">Taille recommandée : 500x500 pixels (format carré)</p>
+                                </div>
 
-                        <div class="field">
-                            <label class="label">Localisation</label>
-                            <div class="control">
-                                <input class="input" type="text" value="Paris, France">
-                            </div>
-                        </div>
+                                <!-- Informations personnelles -->
+                                <div class="profile-section">
+                                    <h2 class="profile-section-title">
+                                        <i class="fas fa-id-card"></i> Informations personnelles
+                                    </h2>
+                                    
+                                    <div class="field is-horizontal">
+                                        <div class="field-body">
+                                            <div class="field">
+                                                <label class="label">Prénom</label>
+                                                <div class="control has-icons-left">
+                                                    <input class="input" type="text" id="first-name" required>
+                                                    <span class="icon is-left">
+                                                        <i class="fas fa-user"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="field">
+                                                <label class="label">Nom</label>
+                                                <div class="control has-icons-left">
+                                                    <input class="input" type="text" id="last-name" required>
+                                                    <span class="icon is-left">
+                                                        <i class="fas fa-user"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="field">
+                                        <label class="label">Pseudo</label>
+                                        <div class="control has-icons-left">
+                                            <input class="input" type="text" id="username" required>
+                                            <span class="icon is-left">
+                                                <i class="fas fa-at"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="field is-horizontal">
+                                        <div class="field-body">
+                                            <div class="field">
+                                                <label class="label">Date de naissance</label>
+                                                <div class="control has-icons-left">
+                                                    <input class="input" type="date" id="birthdate" required>
+                                                    <span class="icon is-left">
+                                                        <i class="fas fa-birthday-cake"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="field">
+                                                <label class="label">Âge</label>
+                                                <div class="control">
+                                                    <input class="input" type="number" id="age" min="13" max="120" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="field">
+                                                <label class="label">Genre</label>
+                                                <div class="control">
+                                                    <div class="select is-fullwidth">
+                                                        <select id="gender">
+                                                            <option value="">Sélectionner</option>
+                                                            <option value="male">Homme</option>
+                                                            <option value="female">Femme</option>
+                                                            <option value="other">Autre</option>
+                                                            <option value="prefer-not-to-say">Préfère ne pas dire</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
-                        <div class="field">
-                            <label class="label">Bio</label>
-                            <div class="control">
-                                <textarea class="textarea" rows="3">Développeur passionné</textarea>
-                            </div>
-                        </div>
+                                <!-- Situation -->
+                                <div class="profile-section">
+                                    <h2 class="profile-section-title">
+                                        <i class="fas fa-heart"></i> Situation
+                                    </h2>
+                                    
+                                    <div class="field is-horizontal">
+                                        <div class="field-body">
+                                            <div class="field">
+                                                <label class="label">Situation matrimoniale</label>
+                                                <div class="control">
+                                                    <div class="select is-fullwidth">
+                                                        <select id="relationship-status">
+                                                            <option value="">Sélectionner</option>
+                                                            <option value="single">Célibataire</option>
+                                                            <option value="in-a-relationship">En couple</option>
+                                                            <option value="engaged">Fiancé(e)</option>
+                                                            <option value="married">Marié(e)</option>
+                                                            <option value="complicated">C'est compliqué</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="field">
+                                                <label class="label">Profession</label>
+                                                <div class="control has-icons-left">
+                                                    <input class="input" type="text" id="profession" placeholder="Votre métier">
+                                                    <span class="icon is-left">
+                                                        <i class="fas fa-briefcase"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
-                        <div class="field is-grouped is-grouped-centered">
-                            <div class="control">
-                                <button type="submit" class="button is-primary">
-                                    <i class="fas fa-save mr-2"></i>Enregistrer
-                                </button>
-                            </div>
-                            <div class="control">
-                                <a href="#profile" class="button is-light">Annuler</a>
-                            </div>
+                                <!-- Localisation -->
+                                <div class="profile-section">
+                                    <h2 class="profile-section-title">
+                                        <i class="fas fa-map-marker-alt"></i> Localisation
+                                    </h2>
+                                    
+                                    <div class="field is-horizontal">
+                                        <div class="field-body">
+                                           <div class="field">
+                                    <label class="label">Pays</label>
+                                    <div class="control">
+                                        <div class="select is-fullwidth">
+                                            <select id="country">
+                                                <option value="">Sélectionner un pays</option>
+                                                <option value="AF">Afghanistan</option>
+                                                <option value="ZA">Afrique du Sud</option>
+                                                <option value="AL">Albanie</option>
+                                                <option value="DZ">Algérie</option>
+                                                <option value="DE">Allemagne</option>
+                                                <option value="AD">Andorre</option>
+                                                <option value="AO">Angola</option>
+                                                <option value="AI">Anguilla</option>
+                                                <option value="AQ">Antarctique</option>
+                                                <option value="AG">Antigua-et-Barbuda</option>
+                                                <option value="SA">Arabie saoudite</option>
+                                                <option value="AR">Argentine</option>
+                                                <option value="AM">Arménie</option>
+                                                <option value="AW">Aruba</option>
+                                                <option value="AU">Australie</option>
+                                                <option value="AT">Autriche</option>
+                                                <option value="AZ">Azerbaïdjan</option>
+                                                <option value="BS">Bahamas</option>
+                                                <option value="BH">Bahreïn</option>
+                                                <option value="BD">Bangladesh</option>
+                                                <option value="BB">Barbade</option>
+                                                <option value="BE">Belgique</option>
+                                                <option value="BZ">Belize</option>
+                                                <option value="BJ">Bénin</option>
+                                                <option value="BM">Bermudes</option>
+                                                <option value="BT">Bhoutan</option>
+                                                <option value="BY">Biélorussie</option>
+                                                <option value="BO">Bolivie</option>
+                                                <option value="BA">Bosnie-Herzégovine</option>
+                                                <option value="BW">Botswana</option>
+                                                <option value="BR">Brésil</option>
+                                                <option value="BN">Brunei</option>
+                                                <option value="BG">Bulgarie</option>
+                                                <option value="BF">Burkina Faso</option>
+                                                <option value="BI">Burundi</option>
+                                                <option value="KH">Cambodge</option>
+                                                <option value="CM">Cameroun</option>
+                                                <option value="CA">Canada</option>
+                                                <option value="CV">Cap-Vert</option>
+                                                <option value="CL">Chili</option>
+                                                <option value="CN">Chine</option>
+                                                <option value="CY">Chypre</option>
+                                                <option value="CO">Colombie</option>
+                                                <option value="KM">Comores</option>
+                                                <option value="CG">Congo-Brazzaville</option>
+                                                <option value="CD">Congo-Kinshasa</option>
+                                                <option value="KP">Corée du Nord</option>
+                                                <option value="KR">Corée du Sud</option>
+                                                <option value="CR">Costa Rica</option>
+                                                <option value="CI">Côte d'Ivoire</option>
+                                                <option value="HR">Croatie</option>
+                                                <option value="CU">Cuba</option>
+                                                <option value="DK">Danemark</option>
+                                                <option value="DJ">Djibouti</option>
+                                                <option value="DM">Dominique</option>
+                                                <option value="EG">Égypte</option>
+                                                <option value="AE">Émirats arabes unis</option>
+                                                <option value="EC">Équateur</option>
+                                                <option value="ER">Érythrée</option>
+                                                <option value="ES">Espagne</option>
+                                                <option value="EE">Estonie</option>
+                                                <option value="US">États-Unis</option>
+                                                <option value="ET">Éthiopie</option>
+                                                <option value="FI">Finlande</option>
+                                                <option value="FR">France</option>
+                                                <option value="GA">Gabon</option>
+                                                <option value="GM">Gambie</option>
+                                                <option value="GE">Géorgie</option>
+                                                <option value="GH">Ghana</option>
+                                                <option value="GI">Gibraltar</option>
+                                                <option value="GR">Grèce</option>
+                                                <option value="GD">Grenade</option>
+                                                <option value="GL">Groenland</option>
+                                                <option value="GP">Guadeloupe</option>
+                                                <option value="GU">Guam</option>
+                                                <option value="GT">Guatemala</option>
+                                                <option value="GG">Guernesey</option>
+                                                <option value="GN">Guinée</option>
+                                                <option value="GQ">Guinée équatoriale</option>
+                                                <option value="GW">Guinée-Bissau</option>
+                                                <option value="GY">Guyana</option>
+                                                <option value="GF">Guyane française</option>
+                                                <option value="HT">Haïti</option>
+                                                <option value="HN">Honduras</option>
+                                                <option value="HU">Hongrie</option>
+                                                <option value="IN">Inde</option>
+                                                <option value="ID">Indonésie</option>
+                                                <option value="IQ">Irak</option>
+                                                <option value="IR">Iran</option>
+                                                <option value="IE">Irlande</option>
+                                                <option value="IS">Islande</option>
+                                                <option value="IL">Israël</option>
+                                                <option value="IT">Italie</option>
+                                                <option value="JM">Jamaïque</option>
+                                                <option value="JP">Japon</option>
+                                                <option value="JE">Jersey</option>
+                                                <option value="JO">Jordanie</option>
+                                                <option value="KZ">Kazakhstan</option>
+                                                <option value="KE">Kenya</option>
+                                                <option value="KG">Kirghizistan</option>
+                                                <option value="KI">Kiribati</option>
+                                                <option value="KW">Koweït</option>
+                                                <option value="LA">Laos</option>
+                                                <option value="LS">Lesotho</option>
+                                                <option value="LV">Lettonie</option>
+                                                <option value="LB">Liban</option>
+                                                <option value="LR">Libéria</option>
+                                                <option value="LY">Libye</option>
+                                                <option value="LI">Liechtenstein</option>
+                                                <option value="LT">Lituanie</option>
+                                                <option value="LU">Luxembourg</option>
+                                                <option value="MK">Macédoine du Nord</option>
+                                                <option value="MG">Madagascar</option>
+                                                <option value="MY">Malaisie</option>
+                                                <option value="MW">Malawi</option>
+                                                <option value="MV">Maldives</option>
+                                                <option value="ML">Mali</option>
+                                                <option value="MT">Malte</option>
+                                                <option value="MA">Maroc</option>
+                                                <option value="MQ">Martinique</option>
+                                                <option value="MU">Maurice</option>
+                                                <option value="MR">Mauritanie</option>
+                                                <option value="YT">Mayotte</option>
+                                                <option value="MX">Mexique</option>
+                                                <option value="FM">Micronésie</option>
+                                                <option value="MD">Moldavie</option>
+                                                <option value="MC">Monaco</option>
+                                                <option value="MN">Mongolie</option>
+                                                <option value="ME">Monténégro</option>
+                                                <option value="MS">Montserrat</option>
+                                                <option value="MZ">Mozambique</option>
+                                                <option value="MM">Myanmar (Birmanie)</option>
+                                                <option value="NA">Namibie</option>
+                                                <option value="NR">Nauru</option>
+                                                <option value="NP">Népal</option>
+                                                <option value="NI">Nicaragua</option>
+                                                <option value="NE">Niger</option>
+                                                <option value="NG">Nigéria</option>
+                                                <option value="NU">Niue</option>
+                                                <option value="NO">Norvège</option>
+                                                <option value="NC">Nouvelle-Calédonie</option>
+                                                <option value="NZ">Nouvelle-Zélande</option>
+                                                <option value="OM">Oman</option>
+                                                <option value="UG">Ouganda</option>
+                                                <option value="UZ">Ouzbékistan</option>
+                                                <option value="PK">Pakistan</option>
+                                                <option value="PW">Palaos</option>
+                                                <option value="PA">Panama</option>
+                                                <option value="PG">Papouasie-Nouvelle-Guinée</option>
+                                                <option value="PY">Paraguay</option>
+                                                <option value="NL">Pays-Bas</option>
+                                                <option value="PE">Pérou</option>
+                                                <option value="PH">Philippines</option>
+                                                <option value="PL">Pologne</option>
+                                                <option value="PF">Polynésie française</option>
+                                                <option value="PR">Porto Rico</option>
+                                                <option value="PT">Portugal</option>
+                                                <option value="QA">Qatar</option>
+                                                <option value="RE">Réunion</option>
+                                                <option value="RO">Roumanie</option>
+                                                <option value="GB">Royaume-Uni</option>
+                                                <option value="RU">Russie</option>
+                                                <option value="RW">Rwanda</option>
+                                                <option value="EH">Sahara occidental</option>
+                                                <option value="BL">Saint-Barthélemy</option>
+                                                <option value="KN">Saint-Christophe-et-Niévès</option>
+                                                <option value="SM">Saint-Marin</option>
+                                                <option value="MF">Saint-Martin</option>
+                                                <option value="PM">Saint-Pierre-et-Miquelon</option>
+                                                <option value="VC">Saint-Vincent-et-les-Grenadines</option>
+                                                <option value="SH">Sainte-Hélène</option>
+                                                <option value="LC">Sainte-Lucie</option>
+                                                <option value="SV">Salvador</option>
+                                                <option value="WS">Samoa</option>
+                                                <option value="AS">Samoa américaines</option>
+                                                <option value="ST">Sao Tomé-et-Principe</option>
+                                                <option value="SN">Sénégal</option>
+                                                <option value="RS">Serbie</option>
+                                                <option value="SC">Seychelles</option>
+                                                <option value="SL">Sierra Leone</option>
+                                                <option value="SG">Singapour</option>
+                                                <option value="SK">Slovaquie</option>
+                                                <option value="SI">Slovénie</option>
+                                                <option value="SO">Somalie</option>
+                                                <option value="SD">Soudan</option>
+                                                <option value="SS">Soudan du Sud</option>
+                                                <option value="LK">Sri Lanka</option>
+                                                <option value="SE">Suède</option>
+                                                <option value="CH">Suisse</option>
+                                                <option value="SR">Suriname</option>
+                                                <option value="SJ">Svalbard et Jan Mayen</option>
+                                                <option value="SZ">Swaziland</option>
+                                                <option value="SY">Syrie</option>
+                                                <option value="TJ">Tadjikistan</option>
+                                                <option value="TW">Taïwan</option>
+                                                <option value="TZ">Tanzanie</option>
+                                                <option value="TD">Tchad</option>
+                                                <option value="CZ">Tchéquie</option>
+                                                <option value="TF">Terres australes françaises</option>
+                                                <option value="IO">Territoire britannique de l'océan Indien</option>
+                                                <option value="TH">Thaïlande</option>
+                                                <option value="TL">Timor oriental</option>
+                                                <option value="TG">Togo</option>
+                                                <option value="TK">Tokelau</option>
+                                                <option value="TO">Tonga</option>
+                                                <option value="TT">Trinité-et-Tobago</option>
+                                                <option value="TN">Tunisie</option>
+                                                <option value="TM">Turkménistan</option>
+                                                <option value="TR">Turquie</option>
+                                                <option value="TV">Tuvalu</option>
+                                                <option value="UA">Ukraine</option>
+                                                <option value="UY">Uruguay</option>
+                                                <option value="VU">Vanuatu</option>
+                                                <option value="VE">Venezuela</option>
+                                                <option value="VN">Vietnam</option>
+                                                <option value="WF">Wallis-et-Futuna</option>
+                                                <option value="YE">Yémen</option>
+                                                <option value="ZM">Zambie</option>
+                                                <option value="ZW">Zimbabwe</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                            <div class="field">
+                                                <label class="label">Ville</label>
+                                                <div class="control has-icons-left">
+                                                    <input class="input" type="text" id="city" placeholder="Votre ville">
+                                                    <span class="icon is-left">
+                                                        <i class="fas fa-city"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="field">
+                                        <label class="label">Adresse</label>
+                                        <div class="control has-icons-left">
+                                            <input class="input" type="text" id="address" placeholder="Votre adresse">
+                                            <span class="icon is-left">
+                                                <i class="fas fa-home"></i>
+                                            </span>
+                                        </div>
+                                        <p class="help">Seuls vos amis pourront voir cette information</p>
+                                    </div>
+                                </div>
+
+                                <!-- À propos -->
+                                <div class="profile-section">
+                                    <h2 class="profile-section-title">
+                                        <i class="fas fa-info-circle"></i> À propos
+                                    </h2>
+                                    
+                                    <div class="field">
+                                        <label class="label">Bio</label>
+                                        <div class="control">
+                                            <textarea class="textarea" id="bio" rows="4" maxlength="500" placeholder="Parlez-nous de vous..."></textarea>
+                                        </div>
+                                        <p class="help"><span id="bio-counter">0</span>/500 caractères</p>
+                                    </div>
+                                    
+                                    <div class="field">
+                                        <label class="label">Centres d'intérêt</label>
+                                        <div class="control has-icons-left">
+                                            <input class="input" type="text" id="interests" placeholder="Sports, musique, voyages...">
+                                            <span class="icon is-left">
+                                                <i class="fas fa-heart"></i>
+                                            </span>
+                                        </div>
+                                        <p class="help">Séparez par des virgules</p>
+                                    </div>
+                                </div>
+
+                                <!-- Boutons -->
+                                <div class="field is-grouped is-grouped-centered mt-6">
+                                    <div class="control">
+                                        <button type="submit" class="button save-btn is-medium">
+                                            <i class="fas fa-save mr-2"></i>Enregistrer le profile 
+                                        </button>
+                                    </div>
+                                    <div class="control">
+                                        <a href="profile.html" class="button cancel-btn is-light is-medium">
+                                            <i class="fas fa-times mr-2"></i>Annuler
+                                        </a>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
+    </section>
 
-                <script src="../../assets/js/utils.js"></script>
-                <script src="../../assets/js/router.js"></script>
-                <script src="../../assets/js/app.js"></script>
-
-
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Prévisualisation photo de profil
+            const fileInput = document.querySelector('#profile-pic');
+            const fileName = document.querySelector('.file-name');
+            const preview = document.getElementById('profile-pic-preview');
+            
+            fileInput.addEventListener('change', function(e) {
+                if (fileInput.files.length > 0) {
+                    const reader = new FileReader();
+                    reader.onload = function(event) {
+                        preview.src = event.target.result;
+                        preview.style.display = 'block';
+                    };
+                    reader.readAsDataURL(fileInput.files[0]);
+                    fileName.textContent = fileInput.files[0].name;
+                } else {
+                    preview.style.display = 'none';
+                    fileName.textContent = 'Aucun fichier sélectionné';
+                }
+            });
+            
+            // Calcul de l'âge
+            const birthdateInput = document.querySelector('#birthdate');
+            const ageInput = document.querySelector('#age');
+            
+            birthdateInput.addEventListener('change', function() {
+                if (birthdateInput.value) {
+                    const birthDate = new Date(birthdateInput.value);
+                    const today = new Date();
+                    let age = today.getFullYear() - birthDate.getFullYear();
+                    const monthDiff = today.getMonth() - birthDate.getMonth();
+                    
+                    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+                        age--;
+                    }
+                    
+                    ageInput.value = age;
+                }
+            });
+            
+            // Compteur de bio
+            const bioTextarea = document.querySelector('#bio');
+            const bioCounter = document.querySelector('#bio-counter');
+            
+            bioTextarea.addEventListener('input', function() {
+                bioCounter.textContent = bioTextarea.value.length;
+            });
+            
+            // Soumission du formulaire
+            const profileForm = document.querySelector('#edit-profile-form');
+            
+            profileForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const submitBtn = document.querySelector('#save-profile');
+                submitBtn.classList.add('is-loading');
+                
+                // Simulation d'enregistrement
+                setTimeout(function() {
+                    window.location.href = 'profile.html';
+                }, 1500);
+            });
+        });
+    </script>
 </body>
 </html>
