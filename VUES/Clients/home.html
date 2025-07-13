@@ -5,432 +5,639 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FriendSphere - Fil d'actualités</title>
     
-    <!-- CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         :root {
-            --primary: #1877f2;
-            --primary-hover: #166fe5;
-            --secondary: #42b72a;
-            --bg-light: #f0f2f5;
-            --shadow-sm: 0 1px 2px rgba(0,0,0,0.1);
-            --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+            --fb-blue: #1877f2;
+            --fb-blue-dark: #166fe5;
+            --fb-blue-light: #e7f3ff;
+            --fb-text-dark: #1c1e21;
+            --fb-text-gray: #65676b;
+            --fb-bg-gray: #f0f2f5;
+            --fb-white: #ffffff;
+            --fb-card-gray: #f0f2f5;
+            --fb-green: #42b72a;
         }
         
         body {
-            background-color: var(--bg-light);
-            font-family: 'Segoe UI', system-ui, sans-serif;
+            background-color: var(--fb-bg-gray);
+            font-family: 'Segoe UI', Helvetica, Arial, sans-serif;
+            color: var(--fb-text-dark);
         }
         
-        /* Header stylisé */
-        .hero-header {
-            background: linear-gradient(135deg, var(--primary) 0%, #1e3c72 100%);
-            box-shadow: var(--shadow-md);
+        /* Header Facebook-like */
+        .fb-header {
+            background-color: var(--fb-white);
+            border-bottom: 1px solid #dddfe2;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
             position: sticky;
             top: 0;
             z-index: 100;
+            height: 56px;
         }
         
-        .logo-text {
-            font-family: 'Arial Rounded MT Bold', sans-serif;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            letter-spacing: -0.5px;
+        .fb-logo {
+            color: var(--fb-blue);
+            font-weight: 700;
+            font-size: 1.8rem;
         }
         
-        .navbar-item:hover {
-            background-color: rgba(255,255,255,0.1) !important;
-        }
-        
-        /* Animations personnalisées */
-        @keyframes floatIn {
-            0% { transform: translateY(20px); opacity: 0; }
-            100% { transform: translateY(0); opacity: 1; }
-        }
-        
-        .float-in {
-            animation: floatIn 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
-        }
-        
-        .new-post-pulse {
-            animation: pulse 1.5s ease-out;
-        }
-        
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(24, 119, 242, 0.4); }
-            70% { box-shadow: 0 0 0 10px rgba(24, 119, 242, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(24, 119, 242, 0); }
-        }
-        
-        /* Cards stylisées */
-        .post-card {
-            border-radius: 12px;
-            box-shadow: var(--shadow-sm);
-            transition: all 0.3s ease;
-            border: 1px solid rgba(0,0,0,0.05);
-        }
-        
-        .post-card:hover {
-            box-shadow: var(--shadow-md);
-            transform: translateY(-2px);
-        }
-        
-        /* Réactions stylisées */
-        .reaction-tray {
-            display: none;
-            position: absolute;
-            bottom: 100%;
-            left: 0;
-            background: white;
+        .fb-search {
+            background-color: #f0f2f5;
             border-radius: 50px;
-            padding: 5px 10px;
-            box-shadow: var(--shadow-md);
-            z-index: 10;
+            border: none;
+            padding-left: 40px;
         }
         
-        .reaction-btn:hover .reaction-tray {
+        .fb-search:focus {
+            box-shadow: none;
+            background-color: #e7f3ff;
+        }
+        
+        .fb-nav-icon {
+            color: var(--fb-text-gray);
+            font-size: 1.5rem;
+            padding: 0 15px;
+        }
+        
+        .fb-nav-icon:hover {
+            color: var(--fb-blue);
+        }
+        
+        .fb-nav-icon.active {
+            color: var(--fb-blue);
+            position: relative;
+        }
+        
+        .fb-nav-icon.active:after {
+            content: "";
+            position: absolute;
+            bottom: -16px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--fb-blue);
+        }
+        
+        /* Main content */
+        .fb-main {
+            padding-top: 20px;
+        }
+        
+        /* Left sidebar */
+        .fb-sidebar-item {
             display: flex;
-        }
-        
-        .reaction-emoji {
-            transition: all 0.2s;
+            align-items: center;
+            padding: 8px;
+            border-radius: 8px;
             cursor: pointer;
-            font-size: 1.2em;
-            margin: 0 3px;
         }
         
-        .reaction-emoji:hover {
-            transform: scale(1.4) translateY(-5px);
+        .fb-sidebar-item:hover {
+            background-color: #e4e6eb;
         }
         
-        /* Badges */
-        .live-badge {
-            animation: pulse 2s infinite;
+        .fb-sidebar-item .icon {
+            margin-right: 10px;
+            color: var(--fb-blue);
+        }
+        
+        /* Post creator */
+        .fb-post-creator {
+            background: var(--fb-white);
+            border-radius: 8px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            border: 1px solid #dddfe2;
+        }
+        
+        .fb-post-input {
+            border: none;
+            box-shadow: none;
+            background: #f0f2f5;
+            border-radius: 20px;
+        }
+        
+        .fb-post-input:focus {
+            box-shadow: none;
+        }
+        
+        .fb-post-option {
+            color: var(--fb-text-gray);
+            font-weight: 600;
+        }
+        
+        .fb-post-option:hover {
+            background: #f0f2f5;
+        }
+        
+        /* Post card */
+        .fb-post {
+            background: var(--fb-white);
+            border-radius: 8px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            border: 1px solid #dddfe2;
+        }
+        
+        .fb-post-header {
+            padding: 12px 16px 0;
+        }
+        
+        .fb-post-content {
+            padding: 0 16px;
+        }
+        
+        .fb-post-image {
+            max-height: 500px;
+            width: 100%;
+            object-fit: cover;
+        }
+        
+        .fb-post-actions {
+            border-top: 1px solid #dddfe2;
+            border-bottom: 1px solid #dddfe2;
+            padding: 4px 0;
+        }
+        
+        .fb-action-btn {
+            color: var(--fb-text-gray);
+            font-weight: 600;
+            border-radius: 4px;
+            padding: 8px;
+        }
+        
+        .fb-action-btn:hover {
+            background: #f0f2f5;
+        }
+        
+        .fb-action-btn .icon {
+            margin-right: 8px;
+        }
+        
+        /* Right sidebar */
+        .fb-sponsor {
+            color: var(--fb-text-gray);
+            font-size: 0.9rem;
+        }
+        
+        /* Colors */
+        .has-fb-blue {
+            background-color: var(--fb-blue) !important;
+            color: white !important;
+        }
+        
+        .has-fb-blue:hover {
+            background-color: var(--fb-blue-dark) !important;
+        }
+        
+        .has-fb-green {
+            background-color: var(--fb-green) !important;
+            color: white !important;
+        }
+        
+        /* Utilities */
+        .rounded-lg {
+            border-radius: 8px;
+        }
+        
+        .text-fb-gray {
+            color: var(--fb-text-gray);
         }
     </style>
 </head>
 <body>
-    <!-- Header Premium -->
-    <header class="hero-header animate__animated animate__fadeInDown">
-        <nav class="navbar is-primary">
-            <div class="container">
+    <!-- Header Facebook-like -->
+    <header class="fb-header">
+        <div class="container">
+            <nav class="navbar">
                 <div class="navbar-brand">
-                    <a class="navbar-item" href="#">
-                        <span class="icon-text">
-                            <span class="icon">
-                                <i class="fas fa-users fa-lg"></i>
-                            </span>
-                            <span class="logo-text has-text-white has-text-weight-bold is-size-4">FriendSphere</span>
-                        </span>
-                    </a>
-                    
-                    <a role="button" class="navbar-burger has-text-white" aria-label="menu">
-                        <span aria-hidden="true"></span>
-                        <span aria-hidden="true"></span>
-                        <span aria-hidden="true"></span>
+                    <a class="navbar-item fb-logo">
+                        <i class="fab fa-facebook"></i>
                     </a>
                 </div>
                 
                 <div class="navbar-menu">
                     <div class="navbar-start">
-                        <a class="navbar-item has-text-white has-text-weight-semibold is-active">
-                            <i class="fas fa-home mr-2"></i> Accueil
-                        </a>
-                        <a class="navbar-item has-text-white has-text-weight-semibold">
-                            <i class="fas fa-user-friends mr-2"></i> Amis
-                        </a>
-                    </div>
-                    
-                    <div class="navbar-item is-expanded">
-                        <div class="field has-addons">
-                            <div class="control is-expanded">
-                                <input class="input is-rounded" type="text" placeholder="Rechercher sur FriendSphere...">
+                        <div class="navbar-item">
+                            <div class="field has-icons-left">
+                                <div class="control has-icons-left">
+                                    <input class="input fb-search" type="text" placeholder="Rechercher sur FriendSphere">
+                                    <span class="icon is-small is-left">
+                                        <i class="fas fa-search"></i>
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     </div>
                     
                     <div class="navbar-end">
-                        <div class="navbar-item has-dropdown is-hoverable">
-                            <a class="navbar-link has-text-white">
-                                <span class="icon-text">
-                                    <span class="icon">
-                                        <i class="fas fa-bell"></i>
-                                    </span>
-                                    <span class="tag is-danger is-rounded is-small" style="position: absolute; top: 5px; right: 5px;">3</span>
-                                </span>
-                            </a>
-                            <div class="navbar-dropdown is-right is-boxed">
-                                <!-- Notifications -->
+                        <div class="navbar-item">
+                            <div class="buttons">
+                                <a class="fb-nav-icon active">
+                                    <i class="fas fa-home"></i>
+                                </a>
+                                <a class="fb-nav-icon">
+                                    <i class="fas fa-tv"></i>
+                                </a>
+                                <a class="fb-nav-icon">
+                                    <i class="fas fa-store"></i>
+                                </a>
+                                <a class="fb-nav-icon">
+                                    <i class="fas fa-users"></i>
+                                </a>
+                                <a class="fb-nav-icon">
+                                    <i class="fas fa-bell"></i>
+                                </a>
                             </div>
                         </div>
                         
-                        <div class="navbar-item has-dropdown is-hoverable">
-                            <a class="navbar-link has-text-white">
-                                <figure class="image is-32x32 mr-2">
-                                    <img class="is-rounded" src="https://randomuser.me/api/portraits/men/32.jpg" alt="Profil">
-                                </figure>
-                            </a>
-                            <div class="navbar-dropdown is-right is-boxed">
-                                <a class="navbar-item">
-                                    <i class="fas fa-user mr-2"></i> Mon profil
-                                </a>
-                                <a class="navbar-item">
-                                    <i class="fas fa-cog mr-2"></i> Paramètres
-                                </a>
-                                <hr class="navbar-divider">
-                                <a class="navbar-item">
-                                    <i class="fas fa-sign-out-alt mr-2"></i> Déconnexion
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </nav>
-    </header>
-
-    <!-- Contenu principal -->
-    <main class="section">
-        <div class="container">
-            <div class="columns is-desktop is-variable is-4">
-                <!-- Colonne gauche - Profil -->
-                <div class="column is-3">
-                    <div class="box profile-card animate__animated animate__fadeInLeft">
-                        <article class="media">
-                            <figure class="media-left">
-                                <p class="image is-64x64">
-                                    <img class="is-rounded" src="https://randomuser.me/api/portraits/men/32.jpg" alt="Profil">
-                                </p>
-                            </figure>
-                            <div class="media-content">
-                                <div class="content">
-                                    <p class="has-text-weight-bold">Jean Dupont</p>
-                                    <p class="is-size-7">@jeandupont</p>
+                        <div class="navbar-item">
+                            <div class="dropdown is-right is-hoverable">
+                                <div class="dropdown-trigger">
+                                    <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+                                        <figure class="image is-32x32">
+                                            <img class="is-rounded" src="https://randomuser.me/api/portraits/men/32.jpg">
+                                        </figure>
+                                    </button>
+                                </div>
+                                <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                                    <div class="dropdown-content">
+                                        <a href="#" class="dropdown-item">
+                                            <i class="fas fa-user mr-2"></i> Mon profil
+                                        </a>
+                                        <a href="#" class="dropdown-item">
+                                            <i class="fas fa-cog mr-2"></i> Paramètres
+                                        </a>
+                                        <hr class="dropdown-divider">
+                                        <a href="#" class="dropdown-item">
+                                            <i class="fas fa-sign-out-alt mr-2"></i> Déconnexion
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
-                        </article>
-                        
-                        <hr>
-                        
-                        <div class="buttons are-small is-flex">
-                            <button class="button is-primary is-flex-grow-1">
-                                <span class="icon">
-                                    <i class="fas fa-user-edit"></i>
-                                </span>
-                                <span>Modifier</span>
-                            </button>
-                            <button class="button is-light is-flex-grow-1">
-                                <span class="icon">
-                                    <i class="fas fa-cog"></i>
-                                </span>
-                                <span>Paramètres</span>
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <div class="box mt-4 animate__animated animate__fadeInLeft animate__delay-1s">
-                        <h3 class="title is-5 has-text-grey">Amis en ligne <span class="tag is-primary is-rounded live-badge">LIVE</span></h3>
-                        <div class="friends-online">
-                            <!-- Amis en ligne -->
                         </div>
                     </div>
                 </div>
-                
-                <!-- Colonne centrale - Fil d'actualités -->
-                <div class="column is-6">
-                    <!-- Création de post -->
-                    <div class="box post-creator animate__animated animate__fadeInUp">
-                        <div class="field">
-                            <div class="control">
-                                <textarea class="textarea is-medium" placeholder="Quoi de neuf, Jean ?" rows="2"></textarea>
-                            </div>
-                        </div>
-                        <div class="field is-grouped is-grouped-right">
-                            <div class="control">
-                                <button class="button is-small">
-                                    <span class="icon">
-                                        <i class="fas fa-image"></i>
-                                    </span>
-                                </button>
-                            </div>
-                            <div class="control">
-                                <button class="button is-small">
-                                    <span class="icon">
-                                        <i class="fas fa-video"></i>
-                                    </span>
-                                </button>
-                            </div>
-                            <div class="control">
-                                <button class="button is-primary">
-                                    <span class="icon">
-                                        <i class="fas fa-paper-plane"></i>
-                                    </span>
-                                    <span>Publier</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Filtres -->
-                    <div class="box filters animate__animated animate__fadeIn">
-                        <div class="tabs is-centered is-toggle is-fullwidth">
-                            <ul>
-                                <li class="is-active">
-                                    <a>
-                                        <span class="icon is-small"><i class="fas fa-home"></i></span>
-                                        <span>Pour vous</span>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main content -->
+    <main class="fb-main">
+        <div class="container">
+            <div class="columns is-desktop is-variable is-2">
+                <!-- Left sidebar -->
+                <div class="column is-2">
+                    <div class="box is-shadowless" style="background: transparent; border: none;">
+                        <aside class="menu">
+                            <ul class="menu-list">
+                                <li>
+                                    <a class="fb-sidebar-item">
+                                        <span class="icon">
+                                            <i class="fas fa-user"></i>
+                                        </span>
+                                        <span>Jean Dupont</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a>
-                                        <span class="icon is-small"><i class="fas fa-user-friends"></i></span>
+                                    <a class="fb-sidebar-item">
+                                        <span class="icon">
+                                            <i class="fas fa-user-friends"></i>
+                                        </span>
                                         <span>Amis</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a>
-                                        <span class="icon is-small"><i class="fas fa-star"></i></span>
-                                        <span>Favoris</span>
+                                    <a class="fb-sidebar-item">
+                                        <span class="icon">
+                                            <i class="fas fa-bookmark"></i>
+                                        </span>
+                                        <span>Enregistré</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="fb-sidebar-item">
+                                        <span class="icon">
+                                            <i class="fas fa-flag"></i>
+                                        </span>
+                                        <span>Pages</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="fb-sidebar-item">
+                                        <span class="icon">
+                                            <i class="fas fa-calendar"></i>
+                                        </span>
+                                        <span>Événements</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="fb-sidebar-item">
+                                        <span class="icon">
+                                            <i class="fas fa-users"></i>
+                                        </span>
+                                        <span>Groupes</span>
                                     </a>
                                 </li>
                             </ul>
-                        </div>
-                    </div>
-                    
-                    <!-- Liste des posts -->
-                    <div id="posts-container" class="animate__animated animate__fadeIn">
-                        <!-- Les posts seront injectés ici -->
-                    </div>
-                    
-                    <!-- Chargement infini -->
-                    <div id="loading-spinner" class="has-text-centered py-6" style="display: none;">
-                        <span class="icon is-large has-text-primary">
-                            <i class="fas fa-spinner fa-pulse fa-2x"></i>
-                        </span>
+                        </aside>
                     </div>
                 </div>
                 
-                <!-- Colonne droite - Suggestions -->
-                <div class="column is-3">
-                    <div class="box animate__animated animate__fadeInRight">
-                        <h3 class="title is-5 has-text-grey">Suggestions</h3>
-                        <!-- Suggestions d'amis -->
+                <!-- Main feed -->
+                <div class="column is-6">
+                    <!-- Post creator -->
+                    <div class="fb-post-creator mb-4">
+                        <div class="media p-3">
+                            <div class="media-left">
+                                <figure class="image is-40x40">
+                                    <img class="is-rounded" src="https://randomuser.me/api/portraits/men/32.jpg">
+                                </figure>
+                            </div>
+                            <div class="media-content">
+                                <div class="field">
+                                    <div class="control">
+                                        <input class="input fb-post-input" type="text" placeholder="Quoi de neuf, Jean ?">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="columns is-mobile is-gapless p-2">
+                            <div class="column">
+                                <button class="button is-fullwidth is-white fb-post-option">
+                                    <span class="icon has-text-danger">
+                                        <i class="fas fa-video"></i>
+                                    </span>
+                                    <span>Vidéo en direct</span>
+                                </button>
+                            </div>
+                            <div class="column">
+                                <button class="button is-fullwidth is-white fb-post-option">
+                                    <span class="icon has-text-success">
+                                        <i class="fas fa-images"></i>
+                                    </span>
+                                    <span>Photo/vidéo</span>
+                                </button>
+                            </div>
+                            <div class="column">
+                                <button class="button is-fullwidth is-white fb-post-option">
+                                    <span class="icon has-text-warning">
+                                        <i class="fas fa-smile"></i>
+                                    </span>
+                                    <span>Humeur/activité</span>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                     
-                    <div class="box mt-4 animate__animated animate__fadeInRight animate__delay-1s">
-                        <h3 class="title is-5 has-text-grey">Événements</h3>
-                        <!-- Événements à venir -->
+                    <!-- Stories -->
+                    <div class="fb-post-creator mb-4 p-3">
+                        <div class="columns is-mobile">
+                            <div class="column">
+                                <div class="box p-1" style="background: linear-gradient(to top, #1877f2, #42b72a);">
+                                    <div class="box p-2" style="background: white;">
+                                        <figure class="image is-64x64">
+                                            <img class="is-rounded" src="">
+                                        </figure>
+                                    </div>
+                                </div>
+                                <p class="has-text-centered is-size-7">Marie</p>
+                            </div>
+                            <div class="column">
+                                <div class="box p-1" style="background: linear-gradient(to top, #1877f2, #42b72a);">
+                                    <div class="box p-2" style="background: white;">
+                                        <figure class="image is-64x64">
+                                            <img class="is-rounded" src="">
+                                        </figure>
+                                    </div>
+                                </div>
+                                <p class="has-text-centered is-size-7">Thomas</p>
+                            </div>
+                            <div class="column">
+                                <div class="box p-1" style="background: linear-gradient(to top, #1877f2, #42b72a);">
+                                    <div class="box p-2" style="background: white;">
+                                        <figure class="image is-64x64">
+                                            <img class="is-rounded" src="">
+                                        </figure>
+                                    </div>
+                                </div>
+                                <p class="has-text-centered is-size-7">Sophie</p>
+                            </div>
+                            <div class="column">
+                                <div class="box p-1" style="background: linear-gradient(to top, #1877f2, #42b72a);">
+                                    <div class="box p-2" style="background: white;">
+                                        <figure class="image is-64x64">
+                                            <img class="is-rounded" src="">
+                                        </figure>
+                                    </div>
+                                </div>
+                                <p class="has-text-centered is-size-7">Alexandre</p>
+                            </div>
+                        </div>
                     </div>
                     
-                    <div class="box mt-4 animate__animated animate__fadeInRight animate__delay-2s">
-                        <h3 class="title is-5 has-text-grey">Groupes</h3>
-                        <!-- Groupes suggérés -->
+                    <!-- Posts feed -->
+                    <div id="posts-container">
+                        <!-- Posts will be injected here -->
+                    </div>
+                </div>
+                
+                <!-- Right sidebar -->
+                <div class="column is-4">
+                    <!-- Contacts -->
+                    <div class="box is-shadowless" style="background: transparent; border: none;">
+                        <div class="level">
+                            <div class="level-left">
+                                <h3 class="title is-6">Contacts</h3>
+                            </div>
+                            <div class="level-right">
+                                <span class="icon">
+                                    <i class="fas fa-video"></i>
+                                </span>
+                                <span class="icon ml-2">
+                                    <i class="fas fa-search"></i>
+                                </span>
+                                <span class="icon ml-2">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <div class="contacts-list">
+                            <div class="media">
+                                <div class="media-left">
+                                    <figure class="image is-32x32">
+                                        <img class="is-rounded" src="">
+                                        <span class="tag is-success is-small" style="position: absolute; bottom: 0; right: 0; border: 2px solid white;"></span>
+                                    </figure>
+                                </div>
+                                <div class="media-content">
+                                    <p>Marie Martin</p>
+                                </div>
+                            </div>
+                            
+                            <div class="media mt-3">
+                                <div class="media-left">
+                                    <figure class="image is-32x32">
+                                        <img class="is-rounded" src="">
+                                        <span class="tag is-success is-small" style="position: absolute; bottom: 0; right: 0; border: 2px solid white;"></span>
+                                    </figure>
+                                </div>
+                                <div class="media-content">
+                                    <p>Thomas Leroy</p>
+                                </div>
+                            </div>
+                            
+                            <div class="media mt-3">
+                                <div class="media-left">
+                                    <figure class="image is-32x32">
+                                        <img class="is-rounded" src="">
+                                    </figure>
+                                </div>
+                                <div class="media-content">
+                                    <p>Sophie Dubois</p>
+                                </div>
+                            </div>
+                            
+                            <div class="media mt-3">
+                                <div class="media-left">
+                                    <figure class="image is-32x32">
+                                        <img class="is-rounded" src="">
+                                    </figure>
+                                </div>
+                                <div class="media-content">
+                                    <p>Alexandre Petit</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Group conversations -->
+                    <div class="box is-shadowless mt-4" style="background: transparent; border: none;">
+                        <h3 class="title is-6">Conversations de groupe</h3>
+                        
+                        <div class="media">
+                            <div class="media-left">
+                                <figure class="image is-32x32">
+                                    <img class="is-rounded" src="https://source.unsplash.com/random/64x64/?group">
+                                </figure>
+                            </div>
+                            <div class="media-content">
+                                <p>Amis d'enfance</p>
+                            </div>
+                        </div>
+                        
+                        <div class="media mt-3">
+                            <div class="media-left">
+                                <figure class="image is-32x32">
+                                    <img class="is-rounded" src="https://source.unsplash.com/random/64x64/?team">
+                                </figure>
+                            </div>
+                            <div class="media-content">
+                                <p>Équipe projet</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </main>
 
-    <!-- Template de post -->
+    <!-- Post template -->
     <template id="post-template">
-        <div class="box post-card float-in mb-4">
-            <article class="media">
-                <div class="media-left">
-                    <figure class="image is-48x48">
-                        <img class="is-rounded" src="" alt="Avatar">
-                    </figure>
-                </div>
-                <div class="media-content">
-                    <div class="content">
-                        <p>
-                            <strong class="post-author"></strong>
-                            <small class="post-time has-text-grey"></small>
-                            <br>
-                            <span class="post-text"></span>
-                        </p>
-                        <div class="post-image-container mt-3" style="display: none;">
-                            <img class="post-image" style="border-radius: 8px; max-height: 500px; width: 100%; object-fit: cover;">
-                        </div>
+        <div class="fb-post mb-4">
+            <!-- Post header -->
+            <div class="fb-post-header">
+                <div class="media">
+                    <div class="media-left">
+                        <figure class="image is-40x40">
+                            <img class="is-rounded" src="" alt="Avatar">
+                        </figure>
                     </div>
-                    <nav class="level is-mobile post-stats">
-                        <div class="level-left">
-                            <div class="level-item">
-                                <span class="icon-text">
-                                    <span class="icon is-small has-text-primary">
-                                        <i class="fas fa-thumbs-up"></i>
-                                    </span>
-                                    <span class="like-count has-text-grey is-size-7">0</span>
-                                </span>
-                            </div>
-                            <div class="level-item">
-                                <span class="has-text-grey is-size-7 comment-count">0 commentaires</span>
-                            </div>
-                        </div>
-                    </nav>
-                    <hr class="mt-1 mb-2">
-                    <div class="field is-grouped is-grouped-centered">
-                        <div class="control reaction-btn">
-                            <button class="button is-white is-small">
-                                <span class="icon-text">
-                                    <span class="icon">
-                                        <i class="far fa-thumbs-up"></i>
-                                    </span>
-                                    <span>J'aime</span>
-                                </span>
-                            </button>
-                            <div class="reaction-tray">
-                                <span class="reaction-emoji" data-reaction="like">👍</span>
-                                <span class="reaction-emoji" data-reaction="love">❤️</span>
-                                <span class="reaction-emoji" data-reaction="haha">😆</span>
-                                <span class="reaction-emoji" data-reaction="wow">😲</span>
-                                <span class="reaction-emoji" data-reaction="sad">😢</span>
-                                <span class="reaction-emoji" data-reaction="angry">😠</span>
-                            </div>
-                        </div>
-                        <div class="control">
-                            <button class="button is-white is-small">
-                                <span class="icon-text">
-                                    <span class="icon">
-                                        <i class="far fa-comment"></i>
-                                    </span>
-                                    <span>Commenter</span>
-                                </span>
-                            </button>
-                        </div>
-                        <div class="control">
-                            <button class="button is-white is-small">
-                                <span class="icon-text">
-                                    <span class="icon">
-                                        <i class="fas fa-share"></i>
-                                    </span>
-                                    <span>Partager</span>
-                                </span>
-                            </button>
-                        </div>
+                    <div class="media-content">
+                        <p class="has-text-weight-bold post-author"></p>
+                        <p class="is-size-7 text-fb-gray post-time"></p>
+                    </div>
+                    <div class="media-right">
+                        <button class="button is-white is-small">
+                            <span class="icon">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </span>
+                        </button>
                     </div>
                 </div>
-            </article>
+            </div>
+            
+            <!-- Post content -->
+            <div class="fb-post-content">
+                <p class="post-text mt-2 mb-3"></p>
+                <div class="post-image-container" style="display: none;">
+                    <img class="fb-post-image rounded-lg" src="">
+                </div>
+            </div>
+            
+            <!-- Post stats -->
+            <div class="level is-mobile px-3 py-2">
+                <div class="level-left">
+                    <div class="level-item">
+                        <span class="icon is-small has-text-primary">
+                            <i class="fas fa-thumbs-up"></i>
+                        </span>
+                        <span class="is-size-7 ml-1 like-count">0</span>
+                    </div>
+                    <div class="level-item ml-3">
+                        <span class="is-size-7 text-fb-gray comment-count">0 commentaires</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Post actions -->
+            <div class="fb-post-actions">
+                <div class="columns is-mobile is-gapless">
+                    <div class="column">
+                        <button class="button is-fullwidth is-white fb-action-btn reaction-btn">
+                            <span class="icon">
+                                <i class="far fa-thumbs-up"></i>
+                            </span>
+                            <span>J'aime</span>
+                        </button>
+                    </div>
+                    <div class="column">
+                        <button class="button is-fullwidth is-white fb-action-btn">
+                            <span class="icon">
+                                <i class="far fa-comment"></i>
+                            </span>
+                            <span>Commenter</span>
+                        </button>
+                    </div>
+                    <div class="column">
+                        <button class="button is-fullwidth is-white fb-action-btn">
+                            <span class="icon">
+                                <i class="fas fa-share"></i>
+                            </span>
+                            <span>Partager</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     </template>
 
-    <!-- Scripts -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Simulateur de flux temps réel
+            // Simulate real-time feed
             const postsContainer = document.getElementById('posts-container');
             const postTemplate = document.getElementById('post-template');
             
-            // Données des amis
+            // Sample data
             const friends = [
-                { name: "Marie Martin", avatar: "https://randomuser.me/api/portraits/women/44.jpg" },
-                { name: "Thomas Leroy", avatar: "https://randomuser.me/api/portraits/men/22.jpg" },
-                { name: "Sophie Dubois", avatar: "https://randomuser.me/api/portraits/women/68.jpg" },
-                { name: "Alexandre Petit", avatar: "https://randomuser.me/api/portraits/men/75.jpg" }
+                { name: "Marie Martin", avatar: "" },
+                { name: "Thomas Leroy", avatar: "" },
+                { name: "Sophie Dubois", avatar: "" },
+                { name: "Alexandre Petit", avatar: "" }
             ];
             
-            // Exemples de posts
             const samplePosts = [
                 { 
                     text: "Juste terminé mon dernier projet ! 🎉 Qui veut voir le résultat ?", 
@@ -450,86 +657,29 @@
                 }
             ];
             
-            // Créer un nouveau post
+            // Create new post
             function createPost(author, avatar, text, imageUrl = null) {
                 const clone = postTemplate.content.cloneNode(true);
-                const postElement = clone.querySelector('.post-card');
+                const postElement = clone.querySelector('.fb-post');
                 
-                // Remplir les données
+                // Fill data
                 clone.querySelector('.post-author').textContent = author;
                 clone.querySelector('img[alt="Avatar"]').src = avatar;
-                clone.querySelector('.post-time').textContent = "à l'instant";
+                clone.querySelector('.post-time').textContent = "Il y a 1 minute";
                 clone.querySelector('.post-text').textContent = text;
                 
                 if (imageUrl) {
                     const container = clone.querySelector('.post-image-container');
-                    const img = clone.querySelector('.post-image');
+                    const img = clone.querySelector('.fb-post-image');
                     img.src = imageUrl;
                     container.style.display = 'block';
                 }
                 
-                // Effet nouveau post
-                postElement.classList.add('new-post-pulse');
-                
-                // Ajouter en haut du fil
-                if (postsContainer.firstChild) {
-                    postsContainer.insertBefore(clone, postsContainer.firstChild);
-                } else {
-                    postsContainer.appendChild(clone);
-                }
-                
-                // Gestion des réactions
-                const reactionBtn = postElement.querySelector('.reaction-btn');
-                const reactionTray = postElement.querySelector('.reaction-tray');
-                
-                reactionBtn.addEventListener('mouseenter', () => {
-                    reactionTray.style.display = 'flex';
-                });
-                
-                reactionBtn.addEventListener('mouseleave', () => {
-                    reactionTray.style.display = 'none';
-                });
-                
-                // Animation hover sur les emojis
-                postElement.querySelectorAll('.reaction-emoji').forEach(emoji => {
-                    emoji.addEventListener('mouseenter', () => {
-                        emoji.style.transform = 'scale(1.4) translateY(-5px)';
-                    });
-                    
-                    emoji.addEventListener('mouseleave', () => {
-                        emoji.style.transform = 'scale(1)';
-                    });
-                    
-                    emoji.addEventListener('click', () => {
-                        const reaction = emoji.dataset.reaction;
-                        const likeCount = postElement.querySelector('.like-count');
-                        likeCount.textContent = parseInt(likeCount.textContent) + 1;
-                        
-                        // Changer l'icône "J'aime" selon la réaction
-                        const likeIcon = postElement.querySelector('.fa-thumbs-up');
-                        likeIcon.classList.remove('far', 'fa-thumbs-up');
-                        
-                        switch(reaction) {
-                            case 'like':
-                                likeIcon.classList.add('fas', 'fa-thumbs-up');
-                                break;
-                            case 'love':
-                                likeIcon.classList.add('fas', 'fa-heart');
-                                likeIcon.style.color = '#f06595';
-                                break;
-                            case 'haha':
-                                likeIcon.classList.add('fas', 'fa-laugh-squint');
-                                likeIcon.style.color = '#fcc419';
-                                break;
-                            // Ajouter d'autres cas selon les réactions
-                        }
-                        
-                        reactionTray.style.display = 'none';
-                    });
-                });
+                // Add to feed
+                postsContainer.appendChild(clone);
             }
             
-            // Simuler l'arrivée de nouveaux posts en temps réel
+            // Simulate new posts
             setInterval(() => {
                 const randomFriend = friends[Math.floor(Math.random() * friends.length)];
                 const randomPost = samplePosts[Math.floor(Math.random() * samplePosts.length)];
@@ -540,10 +690,10 @@
                     randomPost.text,
                     randomPost.image
                 );
-            }, 8000); // Nouveau post toutes les 8 secondes
+            }, 10000); // New post every 10 seconds
             
-            // Chargement initial
-            for (let i = 0; i < 4; i++) {
+            // Initial load
+            for (let i = 0; i < 3; i++) {
                 const friend = friends[i % friends.length];
                 const post = samplePosts[i % samplePosts.length];
                 
@@ -554,42 +704,6 @@
                     post.image
                 );
             }
-            
-            // Chargement infini
-            window.addEventListener('scroll', function() {
-                if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 500) {
-                    document.getElementById('loading-spinner').style.display = 'block';
-                    
-                    // Simuler un chargement
-                    setTimeout(() => {
-                        for (let i = 0; i < 2; i++) {
-                            const friend = friends[Math.floor(Math.random() * friends.length)];
-                            const post = samplePosts[Math.floor(Math.random() * samplePosts.length)];
-                            
-                            createPost(
-                                friend.name,
-                                friend.avatar,
-                                post.text,
-                                post.image
-                            );
-                        }
-                        document.getElementById('loading-spinner').style.display = 'none';
-                    }, 1500);
-                }
-            });
-            
-            // Burger menu pour mobile
-            const navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
-            
-            navbarBurgers.forEach(el => {
-                el.addEventListener('click', () => {
-                    const target = el.dataset.target;
-                    const targetEl = document.getElementById(target);
-                    
-                    el.classList.toggle('is-active');
-                    targetEl.classList.toggle('is-active');
-                });
-            });
         });
     </script>
 </body>
